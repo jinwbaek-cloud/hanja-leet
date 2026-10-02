@@ -620,6 +620,50 @@
       const [showHanjaInContext, setShowHanjaInContext] = useState(false);
 
       // --- 5지선다 객관식 미니 퀴즈(Mini Quiz) States & Handlers ---
+      const QUIZ_QUESTION_COUNT = 10;
+
+      // 퀴즈 문제 문맥 내 정답(표제어 및 한자) 직접 노출 방지 마스킹 함수
+      const maskQuizContext = (ctxText, word, hanja) => {
+        if (!ctxText) return "";
+        const w = cleanWordText(word);
+        const h = (hanja || "").trim();
+        const blank = " ______ ";
+        const escapeRe = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+        let res = ctxText;
+        if (h) {
+          // 1. 한자 병기 형태 치환: word(hanja), **word(hanja)**, **word**(hanja) 등
+          const pWithHanja = new RegExp(`(?:\\*\\*)?(?<![가-힣])${escapeRe(w)}(?:\\*\\*)?\\s*\\(\\s*${escapeRe(h)}\\s*\\)(?:\\*\\*)?`, "g");
+          res = res.replace(pWithHanja, blank);
+          
+          // 2. 단독 (hanja) 형태 치환
+          const pParenHanja = new RegExp(`\\(\\s*${escapeRe(h)}\\s*\\)`, "g");
+          res = res.replace(pParenHanja, blank);
+
+          // 3. 한자 단독 문자열 치환
+          const pHanja = new RegExp(escapeRe(h), "g");
+          res = res.replace(pHanja, blank);
+        }
+
+        // 4. Markdown 강조 표제어 치환: **word**
+        const pBoldWord = new RegExp(`\\*\\*\\s*${escapeRe(w)}\\s*\\*\\*`, "g");
+        res = res.replace(pBoldWord, blank);
+
+        // 5. 일반 단어 형태 치환 (앞 글자가 한글이 아닌 독립된 어휘인 경우만)
+        const pWord = new RegExp(`(?<![가-힣])${escapeRe(w)}`, "g");
+        res = res.replace(pWord, blank);
+
+        // 6. 빈칸 주변 잔여 마크다운 아스테리스크 제거
+        res = res.replace(/\*{2,}\s*______\s*\*{2,}/g, blank);
+        res = res.replace(/\*\*\s*______/g, blank);
+        res = res.replace(/______\s*\*\*/g, blank);
+
+        // 7. 연속된 빈칸 하나로 축약
+        res = res.replace(/(\s*______\s*)+/g, blank);
+
+        return res.trim();
+      };
+
       const [showQuizModal, setShowQuizModal] = useState(false);
       const [quizQuestions, setQuizQuestions] = useState([]);
       const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -634,14 +678,14 @@
           return w && w.hanja && w.hanja.trim() !== "";
         });
 
-        if (eligibleKeys.length < 5) {
+        if (eligibleKeys.length < QUIZ_QUESTION_COUNT) {
           alert("퀴즈를 생성하기 위한 어휘 데이터가 부족합니다.");
           return;
         }
         
-        // 5개 단어를 랜덤하게 셔플
+        // QUIZ_QUESTION_COUNT개 단어를 랜덤하게 셔플
         const shuffledKeys = [...eligibleKeys].sort(() => 0.5 - Math.random());
-        const selectedKeys = shuffledKeys.slice(0, 5);
+        const selectedKeys = shuffledKeys.slice(0, QUIZ_QUESTION_COUNT);
         
         const questions = selectedKeys.map(key => {
           const correctWord = MOCK_WORDS[key];
@@ -679,9 +723,10 @@
           // 정답 + 오답 셔플하여 5개 선지 구성
           const options = [correctOption, ...incorrectOptions].sort(() => 0.5 - Math.random());
           
-          // 지문 문맥 획득
+          // 지문 문맥 획득 및 정답 노출 방지 마스킹
           const contextObj = correctWord.contexts && correctWord.contexts[0];
-          const contextText = contextObj ? (contextObj.content || contextObj.desc) : `이 단어의 본래 문맥적 용례는 [${cleanCorrectWord}]입니다.`;
+          const rawContext = contextObj ? (contextObj.content || contextObj.desc) : `이 단어의 본래 문맥적 용례는 [${cleanCorrectWord}]입니다.`;
+          const maskedContext = maskQuizContext(rawContext, cleanCorrectWord, correctHanja);
           
           return {
             key: key,
@@ -690,7 +735,7 @@
             correctLabel: correctLabel,
             brief: correctWord.brief,
             definition: correctWord.definition,
-            context: contextText,
+            context: maskedContext,
             options: options
           };
         });
@@ -718,7 +763,7 @@
 
       const handleNextQuestion = () => {
         setSelectedOptionIndex(null);
-        if (currentQuizIndex < 4) {
+        if (currentQuizIndex < QUIZ_QUESTION_COUNT - 1) {
           setCurrentQuizIndex(prev => prev + 1);
         } else {
           setIsQuizFinished(true);
@@ -1883,7 +1928,6 @@
                     if (!question) return null;
                     
                     const blankText = " ______ ";
-                    const quizContext = question.context.replace(new RegExp(question.word, 'g'), blankText);
 
                     return (
                       <div className="space-y-6">
@@ -1893,7 +1937,7 @@
                             ⚡ LEET 한자 순삭 퀴즈
                           </span>
                           <span className="text-sm font-serif font-black text-classicText">
-                            문제 {currentQuizIndex + 1} / 5
+                            문제 {currentQuizIndex + 1} / {QUIZ_QUESTION_COUNT}
                           </span>
                         </div>
 
@@ -1904,8 +1948,19 @@
                           </h4>
                           
                           <div className="bg-classicBg/60 border border-classicBorder/50 rounded-2xl p-5 italic text-sm text-classicText leading-relaxed font-medium">
-                            {/* 굵게 뚫어놓은 문장 렌더링 */}
-                            {renderContentWithBold(quizContext.replace(blankText, `**${blankText}**`))}
+                            {(() => {
+                              const parts = question.context.split(" ______ ");
+                              return parts.map((part, pIdx) => (
+                                <React.Fragment key={pIdx}>
+                                  {renderContentWithBold(part)}
+                                  {pIdx < parts.length - 1 && (
+                                    <span className="text-classicRed font-bold font-sans px-1.5 py-0.5 bg-classicRed/10 border-b-2 border-classicRed rounded mx-1 not-italic">
+                                      {blankText.trim()}
+                                    </span>
+                                  )}
+                                </React.Fragment>
+                              ));
+                            })()}
                           </div>
                         </div>
 
@@ -1989,7 +2044,7 @@
                                 className="px-5 py-2 bg-classicRed text-white hover:bg-opacity-95 text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-1"
                                 style={{display: 'flex', alignItems: 'center'}}
                               >
-                                {currentQuizIndex < 4 ? "다음 문제" : "결과 보기"} <ArrowRightIcon className="w-3.5 h-3.5" />
+                                {currentQuizIndex < QUIZ_QUESTION_COUNT - 1 ? "다음 문제" : "결과 보기"} <ArrowRightIcon className="w-3.5 h-3.5" />
                               </button>
                             </div>
                           </div>
@@ -2006,14 +2061,14 @@
                     
                     <div className="space-y-2">
                       <h3 className="text-2xl font-serif font-black text-classicText">미니 퀴즈 학습 완료!</h3>
-                      <p className="text-sm text-classicMuted">5문제 중 총 <span className="text-classicRed font-black text-lg">{quizScore}문제</span> 맞추셨습니다.</p>
+                      <p className="text-sm text-classicMuted">{QUIZ_QUESTION_COUNT}문제 중 총 <span className="text-classicRed font-black text-lg">{quizScore}문제</span> 맞추셨습니다.</p>
                     </div>
 
                     {/* 스코어별 피드백 메시지 */}
                     <div className="bg-classicBg/60 border border-classicBorder rounded-2xl p-4 max-w-sm w-full text-sm font-serif font-bold text-classicText">
-                      {quizScore === 5 && "🎓 수석 합격 페이스! 한자 어휘 마스터입니다."}
-                      {quizScore >= 3 && quizScore <= 4 && "👏 합격 안정권입니다! 리트 문맥력이 훌륭해요."}
-                      {quizScore < 3 && "💪 아쉽습니다! 지문 자구 풀이를 통해 복습해 봅시다."}
+                      {quizScore === QUIZ_QUESTION_COUNT && "🎓 수석 합격 페이스! 한자 어휘 마스터입니다."}
+                      {quizScore >= Math.round(QUIZ_QUESTION_COUNT * 0.7) && quizScore < QUIZ_QUESTION_COUNT && "👏 합격 안정권입니다! 리트 문맥력이 훌륭해요."}
+                      {quizScore < Math.round(QUIZ_QUESTION_COUNT * 0.7) && "💪 아쉽습니다! 지문 자구 풀이를 통해 복습해 봅시다."}
                     </div>
 
                     <div className="flex gap-3 w-full max-w-sm" style={{display: 'flex', gap: '0.75rem', width: '100%', justifyContent: 'center'}}>
