@@ -1,28 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>한알국쉬(리트버전) 개발 및 활용 취지</title>
-  
+  <title>한알국쉬 LEET 2.0 소개 | 법학적성시험 문맥 한자 어휘</title>
+
   <!-- SEO & Canonical Tags -->
   <link rel="canonical" href="https://leet.easyhanja.org/about.html">
-  <meta name="description" content="10개년 LEET 기출 문맥을 철저히 관통하여 구축된 3D 입체 교차형 고등 문해력 사전 '한알국쉬'의 개발 취지와 학술적 가치 소개.">
-  <meta name="author" content="백진우">
+  <meta name="description" content="한알국쉬 LEET 2.0의 편찬 철학과 특징을 소개합니다. 법학적성시험(LEET) 언어이해·추리논증 기출 지문 속 고난도 개념어와 한자어의 속뜻을 직관적으로 탐색할 수 있도록 돕습니다.">
+  <meta name="author" content="한알국쉬 편찬위원회">
 
   <!-- OpenGraph Meta Tags -->
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://leet.easyhanja.org/about.html">
   <meta property="og:site_name" content="한알국쉬">
-  <meta property="og:title" content="한알국쉬(리트버전) 개발 및 활용 취지">
-  <meta property="og:description" content="한알국쉬 리트버전 플랫폼 개발 및 활용 취지">
+  <meta property="og:title" content="한알국쉬 LEET 2.0 소개 | 법학적성시험 문맥 한자 어휘">
+  <meta property="og:description" content="한자를 알면 LEET의 어휘와 문맥이 더 선명해집니다. LEET 기출 문맥 기반 한자어 학습 플랫폼 한알국쉬 2.0.">
   <meta property="og:locale" content="ko_KR">
-  
+
+  <!-- Google Tag (gtag.js) - 운영 도메인(leet.easyhanja.org)에서만 활성화 -->
+  <script>
+    if (window.location.hostname === 'leet.easyhanja.org') {
+      var gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-1X0D4MB6HB';
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-1X0D4MB6HB');
+    }
+  </script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  
+
   <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -33,8 +49,11 @@
             classicBg: '#F5F2FA',
             classicText: '#252030',
             classicRed: '#6C4EB3',
+            classicCard: '#FFFFFF',
             classicBorder: '#E3DCF0',
-            classicMuted: '#7F7790'
+            classicMuted: '#7F7790',
+            classicVioletLight: '#EDE7F6',
+            classicVioletDark: '#523696'
           },
           fontFamily: {
             sans: ['Outfit', 'Noto Sans KR', 'sans-serif'],
@@ -44,12 +63,26 @@
       }
     }
   </script>
+
+  <style>
+    .classic-card {
+      background: #FFFFFF;
+      border: 1px solid #E3DCF0;
+      box-shadow: 0 4px 20px -2px rgba(108, 78, 179, 0.04);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .classic-card:hover {
+      box-shadow: 0 10px 30px -4px rgba(108, 78, 179, 0.08);
+    }
+  </style>
 </head>
+
 <body class="bg-classicBg text-classicText font-sans min-h-screen selection:bg-classicRed selection:text-white antialiased">
 
-  <div class="max-w-4xl mx-auto px-4 py-12 flex flex-col gap-10 min-h-screen">
-    
-    <!-- Header -->
+  <div class="max-w-4xl mx-auto px-4 py-8 md:py-12 flex flex-col gap-10 min-h-screen">
+
+    <!-- Top Header -->
     <header class="flex items-center justify-between border-b border-classicBorder pb-5 sm:pb-6">
       <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
         <div class="w-8 h-8 sm:w-9 sm:h-9 bg-classicRed flex items-center justify-center text-white font-serif font-black text-sm sm:text-base select-none shadow-sm rounded-lg transition-transform group-hover:scale-105">
@@ -57,135 +90,301 @@
         </div>
         <div>
           <div class="flex items-center gap-1.5 sm:gap-2">
-            <h2 class="text-lg sm:text-xl font-serif font-black tracking-tight text-classicText">한알국쉬</h2>
-            <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-[#6C4EB3]/10 text-[#6C4EB3] font-bold border border-[#6C4EB3]/20">LEET</span>
+            <h1 class="text-lg sm:text-xl font-serif font-black tracking-tight text-classicText">한알국쉬</h1>
+            <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-classicRed/10 text-classicRed font-bold border border-classicRed/20">LEET 2.0</span>
           </div>
           <p class="text-[10px] sm:text-xs text-classicMuted font-serif font-medium tracking-wide mt-0.5">한자를 알면 리트(LEET)가 쉬워</p>
         </div>
       </a>
-      
-      <a 
-        href="index.html" 
-        class="px-3 sm:px-4 py-2 border border-classicBorder hover:border-classicRed hover:text-classicRed text-xs font-bold rounded-xl bg-white transition-all shadow-sm"
-      >
-        👈 <span class="hidden xs:inline">메인 </span>대시보드로 이동
-      </a>
+
+      <nav class="flex items-center gap-2 sm:gap-3 text-xs font-bold">
+        <a href="index.html"
+          class="px-3 sm:px-4 py-2 rounded-xl border border-classicBorder text-classicMuted hover:text-classicText hover:bg-white transition-colors shadow-sm bg-white/70">
+          ← 사전 홈으로
+        </a>
+        <a href="guide.html"
+          class="px-3 sm:px-4 py-2 rounded-xl bg-classicRed/10 text-classicRed border border-classicRed/20 hover:bg-classicRed/20 transition-colors shadow-sm">
+          LEET 활용 가이드 ↗
+        </a>
+      </nav>
     </header>
 
-    <!-- Main Content -->
-    <main class="space-y-8 bg-white rounded-3xl p-8 md:p-10 border border-classicBorder shadow-sm">
-      
-      <div class="border-b border-classicBorder pb-5">
-        <span class="text-xs font-bold uppercase tracking-wider text-classicRed bg-classicRed/10 border border-classicRed/20 px-2.5 py-0.5 rounded">
-          Platform Philosophy
-        </span>
-        <h1 class="text-3xl md:text-4xl font-serif font-black text-classicText mt-3 leading-tight">
-          한알국쉬(리트버전) 개발 및 활용 취지
-        </h1>
-        <p class="text-xs text-classicMuted mt-1.5 font-semibold">기획 및 제작: 백진우 교수</p>
-      </div>
+    <!-- Main Hero Banner -->
+    <section class="classic-card rounded-3xl p-8 md:p-12 relative overflow-hidden text-center space-y-4">
+      <div class="absolute -right-16 -top-16 w-60 h-60 rounded-full bg-classicRed/5 blur-3xl pointer-events-none"></div>
 
-      <!-- 📢 업데이트 소식 -->
-      <section class="bg-amber-500/5 border border-amber-500/20 rounded-2xl p-6 space-y-3">
-        <h3 class="text-base font-serif font-black text-amber-800 flex items-center gap-1.5">
-          <span>📢</span> [2026.07.27] 법제처 공식 법률 용어 데이터베이스 탑재
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-classicRed/10 text-classicRed border border-classicRed/20">
+        About Hanal-Gukshi (LEET 2.0 Edition)
+      </span>
+
+      <h2 class="text-3xl md:text-4xl font-serif font-black tracking-tight text-classicText leading-snug">
+        한자를 알면<br class="hidden sm:inline"> <span class="text-classicRed">LEET의 어휘와 문맥</span>이 더 선명해집니다.
+      </h2>
+
+      <p class="text-sm md:text-base text-classicMuted leading-relaxed max-w-2xl mx-auto font-medium">
+        법학적성시험(LEET) 언어이해와 추리논증 기출 지문 속 고난도 한자어의 속뜻을 직관적으로 탐색할 수 있도록 구축된 교육·연구 프로젝트입니다.
+        단순 한자 암기를 넘어, 실제 출제 문맥 속에서 어휘의 논리와 개념을 깊이 있게 이해하도록 돕습니다.
+      </p>
+    </section>
+
+    <!-- Core Philosophy (3대 원칙) -->
+    <section class="space-y-6">
+      <div class="border-b border-classicBorder pb-3">
+        <h3 class="text-lg font-serif font-black text-classicText flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-classicRed"></span>
+          한알국쉬 LEET가 지향하는 3대 원칙
         </h3>
-        <ul class="list-disc pl-5 text-xs text-amber-950/80 space-y-1.5 font-medium">
-          <li>공공데이터포털 API 연동을 통해 검증된 법제처 법률 기초 용어(48건) 신규 이식</li>
-          <li>기존 LEET 필수 기출 어휘와 신규 법률 용어를 직관적으로 구분하는 '법률기초' 카테고리 탭 추가</li>
-          <li>법률 한자어 낱글자 분해(Hanja Breakdown) 및 정밀 정의 표출 지원</li>
-        </ul>
-      </section>
-
-      <!-- 최종 취지문 원고 수록 -->
-      <article class="space-y-6 leading-relaxed text-sm font-medium text-classicText/90">
-        
-        <p class="text-base md:text-lg font-serif font-bold text-classicRed leading-snug">
-          한알국쉬는 '한자를 알면 국어가 더 쉬워요'라는 생각에서 출발한 작은 실험입니다.
-        </p>
-
-        <p class="text-classicText/80">
-          이 플랫폼은 수능과 LEET 등 실제 시험에 등장하는 한자어를 중심으로, 한자를 이해했을 때 문맥과 의미를 어떻게 더 쉽게 파악할 수 있는지를 보여주기 위해 만들었습니다. 한자를 암기하는 것이 목적이 아니라, 독해력과 문해력 향상에 도움이 되는 학습 자료를 제공하는 것을 목표로 합니다.
-        </p>
-
-        <p class="text-classicText/80">
-          이 사이트는 별도의 개발팀 없이 바이브코딩(Vibe Coding)을 활용하여 연구자가 직접 기획하고 제작하였습니다. 아직 완성된 서비스라기보다 계속 발전해 나가는 연구 프로젝트이며, 사용자들의 의견을 반영하여 꾸준히 개선해 나갈 예정입니다.
-        </p>
-
-        <p class="text-classicText/80 font-semibold border-t border-classicBorder/40 pt-4">
-          이 작은 실험이 한자와 한국어, 그리고 문해력 교육을 새롭게 바라보는 하나의 계기가 되기를 바랍니다.
-        </p>
-
-      </article>
-      
-      <!-- Signature block (개인 성함 제외) -->
-      <div class="mt-10 pt-6 border-t border-classicBorder flex flex-col items-end">
-        <p class="font-serif font-bold text-classicText text-base">독해력과 문해력 향상을 위한 새로운 첫걸음</p>
-        <p class="font-serif font-black text-classicRed text-xl mt-1.5">한알국쉬 연구자 드림</p>
       </div>
 
-      <!-- 💡 한알국쉬 발전을 위한 의견 및 오류 제보하기 -->
-      <section class="mt-8 pt-8 border-t border-classicBorder">
-        <div class="bg-classicBg/30 rounded-2xl p-6 border border-classicBorder/55 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div class="text-center md:text-left flex-1">
-            <h3 class="text-base font-serif font-black text-classicText flex items-center justify-center md:justify-start gap-1.5">
-              <span>💡</span> 플랫폼 개선에 동참하기
-            </h3>
-            <p class="text-xs text-classicMuted leading-relaxed mt-1">
-              오류 제보 및 서비스의 발전을 위한 수험생과 교육자 여러분의 소중한 한마디를 기다립니다.
-            </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Principle 1 -->
+        <div class="classic-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-classicRed/10 text-classicRed flex items-center justify-center font-black text-lg font-serif">
+            1
           </div>
-          <div class="w-full md:w-auto shrink-0 flex items-center justify-center">
-            <a 
-              href="https://forms.gle/oZSBiDq6Yqrkbqof6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 bg-classicRed text-white text-xs font-bold rounded-xl shadow-sm hover:bg-classicRed/90 hover:shadow transition-all duration-300 transform active:scale-95"
-            >
-              💡 한알국쉬 발전을 위한 의견 및 오류 제보하기
-            </a>
+          <h4 class="text-base font-serif font-bold text-classicText">자구(字句)의 시각적 해체와 개념 추론</h4>
+          <p class="text-xs text-classicMuted leading-relaxed font-medium">
+            단어의 사전적 뜻만 기계적으로 외우지 않습니다. 낱글자의 훈과 음을 쪼개어 들여다봄으로써, 법률·철학·사회과학 지문에서 생소한 복합어가 나와도 문맥 속에서 그 속뜻을 스스로 유추하는 자생적 문해력을 기릅니다.
+          </p>
+        </div>
+
+        <!-- Principle 2 -->
+        <div class="classic-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-classicRed/10 text-classicRed flex items-center justify-center font-black text-lg font-serif">
+            2
+          </div>
+          <h4 class="text-base font-serif font-bold text-classicText">LEET 기출 원문과 공인 법률 자료 중심</h4>
+          <p class="text-xs text-classicMuted leading-relaxed font-medium">
+            표준국어대사전의 추상적인 일반 예문 대신, 법학전문대학원협의회의 실제 LEET 기출 원문과 공공데이터포털 연동 법제처 법률 용어 등 검증된 출처를 기준으로 예문과 데이터를 엄밀하게 구축하였습니다.
+          </p>
+        </div>
+
+        <!-- Principle 3 -->
+        <div class="classic-card rounded-2xl p-6 space-y-3">
+          <div class="w-10 h-10 rounded-xl bg-classicRed/10 text-classicRed flex items-center justify-center font-black text-lg font-serif">
+            3
+          </div>
+          <h4 class="text-base font-serif font-bold text-classicText">선택받는 지식콘텐츠와 지속적 개선</h4>
+          <p class="text-xs text-classicMuted leading-relaxed font-medium">
+            필요한 교육을 넘어 수험생에게 실제로 선택받는 지식콘텐츠를 지향합니다. 기출 지문에 반복 출현한 필수 어휘를 정밀 선별하고, 사용자의 실제 이용 데이터를 바탕으로 서비스와 콘텐츠 품질을 끊임없이 다듬어 나갑니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- What's New in LEET 2.0 -->
+    <section class="classic-card rounded-3xl p-8 space-y-6 border-2 border-classicRed/30">
+      <div class="border-b border-classicBorder pb-3">
+        <h3 class="text-xl font-serif font-black text-classicText flex items-center gap-2">
+          <span class="text-2xl">🚀</span>
+          한알국쉬 LEET 2.0에서 달라진 점
+        </h3>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs md:text-sm text-classicText leading-relaxed">
+        <!-- 2.0 Feature 1 -->
+        <div class="p-5 rounded-2xl bg-classicBg/60 border border-classicBorder space-y-2">
+          <h4 class="font-serif font-bold text-classicRed flex items-center gap-1.5 text-sm md:text-base">
+            <span>⚡</span> 미니 퀴즈 10문항 확대 & 한글(한자) 병기
+          </h4>
+          <p class="text-classicMuted leading-relaxed font-medium">
+            기존 5문항에서 <strong>10문항</strong>으로 확대하여 한 세트 학습의 몰입도를 높였습니다. 매 세트마다 새로운 문제 조합이 출제되며, 5지선다 체제를 유지하면서 선택지를 <strong>한글(한자)</strong> 형식(예: <em>소급(遡及)</em>)으로 제공하여 실전 문맥 어휘력을 균형 있게 다집니다.
+          </p>
+        </div>
+
+        <!-- 2.0 Feature 2 -->
+        <div class="p-5 rounded-2xl bg-classicBg/60 border border-classicBorder space-y-2">
+          <h4 class="font-serif font-bold text-classicRed flex items-center gap-1.5 text-sm md:text-base">
+            <span>🎯</span> 정밀한 문맥형 빈칸 학습 & 정답 노출 방지
+          </h4>
+          <p class="text-classicMuted leading-relaxed font-medium">
+            문제 지문 속에서 정답 단어가 사전에 노출되지 않도록 문맥 표시 처리를 정밀하게 고도화했습니다. 표제어 단독 표기, 한자 괄호 병기, 지문 내 복수 출현 단어 등을 꼼꼼하게 처리하여, 기출 원문의 논리적 맥락을 온전히 보존하면서 안전하게 빈칸을 풀이할 수 있습니다.
+          </p>
+        </div>
+
+        <!-- 2.0 Feature 3 -->
+        <div class="p-5 rounded-2xl bg-classicBg/60 border border-classicBorder space-y-2">
+          <h4 class="font-serif font-bold text-classicText flex items-center gap-1.5 text-sm md:text-base">
+            <span>📱</span> 스마트폰 최적화 모바일 사용성 개선
+          </h4>
+          <p class="text-classicMuted leading-relaxed font-medium">
+            375px 초소형 모바일 화면부터 태블릿, 데스크톱까지 모든 기기에서 글자 잘림이나 가로 스크롤 없이 쾌적하게 이용할 수 있도록 반응형 UI를 개편했습니다. 이동 중에도 스마트폰으로 검색, 카드 열람, 퀴즈 풀이를 편리하게 수행할 수 있습니다.
+          </p>
+        </div>
+
+        <!-- 2.0 Feature 4 -->
+        <div class="p-5 rounded-2xl bg-classicBg/60 border border-classicBorder space-y-2">
+          <h4 class="font-serif font-bold text-classicText flex items-center gap-1.5 text-sm md:text-base">
+            <span>📊</span> 익명 집계 이용 통계 기반의 지속적 발전
+          </h4>
+          <p class="text-classicMuted leading-relaxed font-medium">
+            2.0부터는 퀴즈 시작·완료, 문항별 정답과 오답 등 <strong>익명화된 이용 통계</strong>를 분석하여 실제 학습 패턴을 바탕으로 서비스를 지속적으로 개선합니다. 이름, 이메일, 학번 등 개인 식별정보는 일체 수집하지 않으며, 순수한 익명 집계 학습 통계를 통해 취약 어휘와 교육 콘텐츠를 더 정교하게 보완합니다.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Detailed Features (LEET 특화 핵심 기능) -->
+    <section class="classic-card rounded-3xl p-8 space-y-6">
+      <div class="border-b border-classicBorder pb-3">
+        <h3 class="text-xl font-serif font-black text-classicText flex items-center gap-2">
+          <span>⚖️</span>
+          LEET 특화 핵심 기능 안내
+        </h3>
+      </div>
+
+      <div class="space-y-4 text-xs md:text-sm text-classicText leading-relaxed">
+        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-classicBg/60 border border-classicBorder">
+          <span class="text-base shrink-0">⚡</span>
+          <div>
+            <strong class="font-bold text-classicRed">기출 문맥 10문항 미니 퀴즈:</strong> 실제 기출 문맥의 빈칸에 알맞은 어휘를 5지선다로 선택하고, 즉각적인 정오답 판정 및 상세 사전 정의와 예문 풀이를 함께 살펴볼 수 있습니다.
           </div>
         </div>
-      </section>
 
-      <!-- ☕ 향후 업그레이드를 위한 커피 한잔 응원하기 -->
-      <section class="mt-8 pt-8 border-t border-classicBorder">
-        <div class="bg-classicBg/30 rounded-2xl p-6 border border-classicBorder/55 flex flex-col md:flex-row items-center gap-6">
-          <div class="w-full md:w-auto shrink-0 text-center">
-            <img src="qr_code.png" alt="후원 QR 코드" class="w-28 h-28 mx-auto rounded-xl border border-classicBorder bg-white p-1 shadow-sm" />
-            <p class="text-[10px] text-classicMuted mt-2 font-bold">☕ 카메라로 QR 코드를 스캔하세요</p>
-          </div>
-          <div class="flex-1 space-y-3 text-center md:text-left">
-            <h3 class="text-base font-serif font-black text-classicText flex items-center justify-center md:justify-start gap-1.5">
-              <span>☕</span> 향후 업그레이드를 위한 커피 한잔 응원하기
-            </h3>
-            <p class="text-xs text-classicMuted leading-relaxed">
-              본 플랫폼은 시험을 앞둔 수험생들을 위해 전체 기능을 조건 없이 완전 무료로 개방합니다.<br />
-              바이브코딩을 통해 연구자가 직접 가꾸어 나가는 이 실험적 공간이 지속해서 업데이트되고 고도화될 수 있도록, 따뜻한 커피 한잔의 응원을 보태어 주시면 감사하겠습니다.
-            </p>
-            <div class="pt-1 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-2.5">
-              <!-- TODO: 백진우 교수님 카카오페이 송금 URL 주소 삽입 자리 -->
-              <a 
-                href="https://qr.kakaopay.com/Ej8ZO47PY" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 bg-[#FFEB00] text-[#3C1E1E] text-xs font-bold rounded-xl shadow-sm hover:bg-[#FEE500] hover:shadow transition-all duration-300 transform active:scale-95"
-              >
-                <span class="text-[10px]">🟡</span> 카카오페이로 송금하기
-              </a>
-            </div>
+        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-classicBg/60 border border-classicBorder">
+          <span class="text-base shrink-0">漢</span>
+          <div>
+            <strong class="font-bold text-classicRed">기출 문맥 속 한자-한글 전환:</strong> 지문 속 표제어를 클릭 한 번으로 한글↔한자 전환하여 실전 독해에서 한자가 지닌 의미 단서를 입체적으로 체득합니다.
           </div>
         </div>
-      </section>
 
-    </main>
+        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-classicBg/60 border border-classicBorder">
+          <span class="text-base shrink-0">🏛️</span>
+          <div>
+            <strong class="font-bold text-classicText">법률 기초 및 기출 어휘 카테고리:</strong> 전문용어 이해형, 개념 이해형, 의미 추론형, 법률기초 탭 등 유형별 분류를 통해 취약 영역 어휘를 집중적으로 탐색할 수 있습니다.
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 p-3.5 rounded-xl bg-classicBg/60 border border-classicBorder">
+          <span class="text-base shrink-0">👁️</span>
+          <div>
+            <strong class="font-bold text-classicText">아는 단어 관리:</strong> 완전히 숙지한 어휘는 메인 화면에서 가려두고, 익숙하지 않은 어휘를 선별하여 집중적으로 반복 회독할 수 있습니다.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Lead Info -->
+    <section class="classic-card rounded-3xl p-8 flex flex-col sm:flex-row items-center gap-6 border-l-4 border-l-classicRed">
+      <div class="w-16 h-16 rounded-2xl bg-classicRed/10 text-classicRed flex items-center justify-center text-2xl font-serif font-black shrink-0">
+        한
+      </div>
+      <div class="space-y-1.5 text-center sm:text-left">
+        <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2">
+          <h4 class="text-lg font-serif font-black text-classicText">기획·편찬: 한알국쉬 편찬위원회 (백진우 교수)</h4>
+        </div>
+        <p class="text-xs text-classicMuted leading-relaxed font-medium">
+          법학적성시험(LEET)의 핵심은 단순 암기가 아닌 고도의 비판적 사고력과 문맥 독해력입니다.
+          어려운 법률·철학 지문 속 한자 어휘의 자구와 속뜻을 밝혀, 수험생 여러분이 시험장에서 텍스트의 본질을 더 명료하고 자신 있게 읽어낼 수 있도록 돕는 교육·연구 프로젝트입니다.
+        </p>
+      </div>
+    </section>
+
+    <!-- Feedback & Error Reporting Section -->
+    <section id="feedback" class="classic-card rounded-3xl p-8 space-y-6 border border-classicBorder scroll-mt-8">
+      <div class="border-b border-classicBorder pb-3">
+        <h3 class="text-xl font-serif font-black text-classicText flex items-center gap-2">
+          <span class="text-2xl">💌</span>
+          의견 및 오류 제보
+        </h3>
+      </div>
+
+      <p class="text-xs md:text-sm text-classicMuted leading-relaxed font-medium">
+        한알국쉬 LEET를 이용하며 발견한 어휘 오류나 개선 의견을 보내 주세요. 어휘의 정의와 한자 자구 분해, 미니 퀴즈의 정답·해설, 모바일 사용 편의 등 여러분의 소중한 피드백을 바탕으로 서비스를 지속해서 보완하겠습니다.
+      </p>
+
+      <div class="p-5 rounded-2xl bg-classicBg/80 border border-classicBorder space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-classicBorder/50 pb-4">
+          <div class="space-y-0.5">
+            <span class="text-[11px] font-serif font-bold text-classicMuted uppercase tracking-wider">의견 접수 이메일</span>
+            <div class="text-base md:text-lg font-mono font-bold text-classicRed select-all">jinw.baek@gmail.com</div>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <a href="mailto:jinw.baek@gmail.com?subject=%5B%ED%95%9C%EC%95%8C%EA%B5%AD%EC%89%AC%20LEET%5D%20%EC%9D%98%EA%B2%AC%20%EB%B0%8F%20%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4&body=1.%20%EC%9D%98%EA%B2%AC%20%EC%A2%85%EB%A5%98%3A%20%EC%96%B4%ED%9C%98%20%EC%A0%95%EB%B3%B4%20%2F%20%EB%AF%B8%EB%8B%80%ED%80%B4%EC%A6%88%20%2F%20%EC%9D%B4%EC%9A%A9%20%EB%B6%88%ED%8E%B8%20%2F%20%EA%B8%B0%ED%83%80%0A%0A2.%20%EA%B4%80%EB%A0%A8%20%EC%96%B4%ED%9C%98%20%EB%98%90%EB%8A%94%20%EB%82%B4%EC%9A%A9%3A%0A%0A3.%20%EC%9D%98%EA%B2%AC%20%EB%80%B4%EC%9A%A9%3A"
+            class="px-5 py-3 rounded-xl bg-classicRed text-white font-serif font-bold text-xs md:text-sm hover:bg-opacity-95 transition-all shadow-sm flex items-center justify-center gap-2 text-center">
+            ✉️ 이메일로 의견 보내기
+          </a>
+          <button onclick="copyEmailAddress()"
+            class="px-5 py-3 rounded-xl bg-white border border-classicBorder text-classicText font-serif font-bold text-xs md:text-sm hover:bg-classicBg transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer">
+            📋 이메일 주소 복사
+          </button>
+          <a href="https://forms.gle/oZSBiDq6Yqrkbqof6" target="_blank" rel="noopener noreferrer"
+            class="px-5 py-3 rounded-xl bg-white border border-classicBorder text-classicMuted hover:text-classicText hover:bg-classicBg font-serif font-bold text-xs md:text-sm transition-all shadow-sm flex items-center justify-center gap-2 text-center">
+            📝 구글 설문지로 제보하기 ↗
+          </a>
+        </div>
+
+        <p class="text-[11px] md:text-xs text-classicMuted leading-relaxed">
+          메일 작성창에서 내용을 작성한 뒤 직접 전송해 주세요. 창이 열리지 않으면 이메일 주소를 복사하여 이용하시는 메일 서비스에서 보내 주시면 됩니다.
+        </p>
+      </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="border-t border-classicBorder pt-8 text-center text-xs text-classicMuted space-y-2 pb-6">
+    <footer class="mt-auto border-t border-classicBorder pt-8 text-center text-xs text-classicMuted space-y-2 pb-6">
       <p>© 2026 한알국쉬(리트버전) & Hanalgukshi Compilation Committee. All rights reserved.</p>
+      <p class="font-serif font-medium text-[10px] uppercase tracking-widest text-classicMuted">
+        기획·편찬: 백진우 • 한자를 알면 리트(LEET)가 쉬워 • POWERED BY REACT & TAILWIND CSS
+      </p>
     </footer>
 
   </div>
 
+  <!-- Toast Container -->
+  <div id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gray-900/90 text-white text-xs md:text-sm px-4 py-2.5 rounded-xl shadow-xl z-50 transition-all opacity-0 pointer-events-none transform translate-y-2">
+  </div>
+
+  <script>
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.classList.remove("opacity-0", "pointer-events-none", "translate-y-2");
+      toast.classList.add("opacity-100", "translate-y-0");
+      setTimeout(() => {
+        toast.classList.remove("opacity-100", "translate-y-0");
+        toast.classList.add("opacity-0", "pointer-events-none", "translate-y-2");
+      }, 3000);
+    }
+
+    function copyEmailAddress() {
+      const email = "jinw.baek@gmail.com";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          showToast("📋 이메일 주소(jinw.baek@gmail.com)가 복사되었습니다.");
+        }).catch(() => {
+          fallbackCopyEmail(email);
+        });
+      } else {
+        fallbackCopyEmail(email);
+      }
+    }
+
+    function fallbackCopyEmail(email) {
+      const textArea = document.createElement("textarea");
+      textArea.value = email;
+      textArea.style.position = "fixed";
+      textArea.style.opacity = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      try {
+        const successful = document.execCommand('copy');
+        if (successful) {
+          showToast("📋 이메일 주소(jinw.baek@gmail.com)가 복사되었습니다.");
+        } else {
+          alert("복사 실패. 아래 이메일 주소를 직접 선택하여 복사해 주세요:\n\n" + email);
+        }
+      } catch (err) {
+        alert("복사 실패. 아래 이메일 주소를 직접 선택하여 복사해 주세요:\n\n" + email);
+      }
+      document.body.removeChild(textArea);
+    }
+  </script>
+
 </body>
+
 </html>
