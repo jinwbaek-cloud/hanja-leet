@@ -83,8 +83,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>한알국쉬(리트버전) | 한자를 알면 리트(LEET)가 쉬워</title>
   
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="한알국쉬(리트버전) - LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 세련되고 품격 있게 배양하는 사전. 차분한 라벤더 톤 테마에 한자 속뜻과 기출 지문 속 전용 용례를 수록하였습니다.">
+  <!-- SEO & Canonical Tags -->
+  <link rel="canonical" href="https://leet.easyhanja.org/">
+  <meta name="description" content="한알국쉬(리트버전) - LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 세련되고 품격 있게 배양하는 디지털 단어장. 373개 핵심 표제어와 기출 지문 속 전용 용례를 수록하였습니다.">
+  <meta name="author" content="백진우">
+
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://leet.easyhanja.org/">
+  <meta property="og:site_name" content="한알국쉬">
+  <meta property="og:title" content="한알국쉬(리트버전) | 한자를 알면 리트(LEET)가 쉬워">
+  <meta property="og:description" content="LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 배양하는 디지털 단어장. 373개 표제어와 기출 문맥 수록.">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="한알국쉬(리트버전) | 한자를 알면 리트(LEET)가 쉬워">
+  <meta name="twitter:description" content="LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 배양하는 디지털 단어장.">
+
+  <!-- JSON-LD WebSite Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "한알국쉬(리트버전)",
+    "alternateName": "한알국쉬 LEET",
+    "url": "https://leet.easyhanja.org/",
+    "description": "LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 배양하는 디지털 단어장",
+    "inLanguage": "ko-KR"
+  }
+  </script>
   
   <!-- Google Fonts (Outfit, Noto Sans KR & Noto Serif KR) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -215,6 +243,16 @@
         background: #FFFFFF !important;
       }
     }
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
     /* 평상시 웹 서핑 시 숨김 */
     .print-area {
       display: none;
@@ -225,6 +263,21 @@
 
   <!-- React Root Node -->
   <div id="root"></div>
+
+  <!-- Fallback noscript for Crawlers and JS-disabled Environments -->
+  <noscript>
+    <div style="padding: 32px 16px; text-align: center; font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif; background: #F5F2FA; color: #252030; min-height: 100vh;">
+      <div style="max-width: 500px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E3DCF0; border-radius: 16px; padding: 24px; box-shadow: 0 4px 20px rgba(108, 78, 179, 0.05);">
+        <div style="width: 40px; height: 40px; background: #6C4EB3; color: #FFFFFF; border-radius: 8px; display: inline-flex; align-items: center; justify-content: center; font-weight: 900; font-size: 18px; margin-bottom: 12px;">한</div>
+        <h1 style="font-size: 20px; font-weight: 800; margin-bottom: 8px;">한알국쉬(리트버전)</h1>
+        <p style="font-size: 14px; color: #7F7790; margin-bottom: 16px;">한자를 알면 리트(LEET)가 쉬워</p>
+        <p style="font-size: 13px; line-height: 1.6; color: #252030;">
+          본 서비스는 리트(LEET) 언어이해 및 추리논증 기출 지문에 등장하는 373개 핵심 한자어의 속뜻과 기출 문맥을 인터랙티브하게 학습하는 웹 플랫폼입니다.<br>
+          모든 기능을 이용하시려면 브라우저의 <strong>자바스크립트(JavaScript)</strong>를 활성화해 주세요.
+        </p>
+      </div>
+    </div>
+  </noscript>
 
   <!-- React & App Logic in Babel Script (Consolidated & Fully Inline) -->
   <script type="text/babel" data-presets="react-classic">
@@ -1032,88 +1085,93 @@
       }
 
       return (
-        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12 flex flex-col gap-10 min-h-screen">
+        <div className="w-full min-w-0 max-w-7xl mx-auto px-4 py-4 sm:py-8 md:py-10 flex flex-col gap-6 sm:gap-8 min-h-screen">
           
           {/* Header */}
-                    {/* Header (2단/듀얼 헤더 구조로 개편) */}
-          <header className="flex flex-col gap-5 border-b border-classicBorder pb-6">
-            {/* [1단 - 최상단]: 로고 및 미니멀한 플랫폼 가이드 단추 */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <header className="w-full min-w-0 flex flex-col gap-3.5 sm:gap-4 border-b border-classicBorder pb-4 sm:pb-5">
+            {/* 1행: 로고 & 제품군 브랜드 표기 & 플랫폼 소개/가이드 링크 */}
+            <div className="flex items-center justify-between gap-2 sm:gap-4">
               <div 
-                className="flex items-center gap-3 cursor-pointer group"
+                className="flex items-center gap-2.5 sm:gap-3 cursor-pointer group"
                 onClick={() => closeDetailView()}
               >
-                {/* Square Seal Stamp Logo in Violet */}
-                <div className="w-9 h-9 bg-classicRed flex items-center justify-center text-white font-serif font-black text-base select-none shadow-sm rounded-sm shrink-0 group-hover:scale-105 transition-transform duration-300">
+                {/* Traditional Square Seal Stamp Logo in Signature Violet */}
+                <div className="w-8 h-8 sm:w-9 sm:h-9 bg-classicRed flex items-center justify-center text-white font-serif font-black text-sm sm:text-base select-none shadow-sm rounded-lg shrink-0 group-hover:scale-105 transition-transform duration-300">
                   한
                 </div>
                 <div>
-                  <h1 className="text-xl font-serif font-black tracking-tight text-classicText flex items-center gap-2">
-                    한알국쉬(리트버전)
-                  </h1>
-                  <p className="text-[10px] text-classicMuted font-serif font-medium tracking-wide mt-0.5">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <h1 className="text-lg sm:text-xl font-serif font-black tracking-tight text-classicText">
+                      한알국쉬
+                    </h1>
+                    <span className="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-[#6C4EB3]/10 text-[#6C4EB3] font-bold border border-[#6C4EB3]/20 shrink-0">
+                      LEET
+                    </span>
+                  </div>
+                  <p className="text-[10px] sm:text-xs text-classicMuted font-serif font-medium tracking-wide mt-0.5">
                     한자를 알면 리트(LEET)가 쉬워
                   </p>
                 </div>
               </div>
 
-              {/* 1단 우측 - 컴팩트하고 미니멀한 텍스트 단추 스타일 (About & Guide) */}
-              <div className="flex items-center gap-4 text-xs font-bold text-classicMuted">
+              {/* 1행 우측: 소개 & 가이드 링크 */}
+              <div className="flex items-center gap-1.5 sm:gap-3 text-xs font-bold text-classicMuted shrink-0">
                 <a 
                   href="about.html" 
-                  className="hover:text-classicRed transition-colors flex items-center gap-1 py-1 px-2 hover:bg-classicRed/5 rounded-lg"
+                  className="hover:text-classicRed transition-colors flex items-center gap-1 py-1 px-1.5 sm:px-2 hover:bg-classicRed/5 rounded-lg text-[11px] sm:text-xs"
                 >
-                  <span>📖</span> 플랫폼 소개
+                  <span className="hidden sm:inline">📖 </span>소개
                 </a>
                 <span className="text-classicBorder">|</span>
                 <a 
                   href="guide.html" 
-                  className="hover:text-classicTeal transition-colors flex items-center gap-1 py-1 px-2 hover:bg-classicTeal/5 rounded-lg"
+                  className="hover:text-classicTeal transition-colors flex items-center gap-1 py-1 px-1.5 sm:px-2 hover:bg-classicTeal/5 rounded-lg text-[11px] sm:text-xs"
                 >
-                  <span>💡</span> 활용 가이드
+                  <span className="hidden sm:inline">💡 </span>가이드
                 </a>
               </div>
             </div>
 
-            {/* [2단 - 하단]: 필터 바 위에 상주하는 대형 볼드형 핵심 학습 도구 그룹 */}
-            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-dashed border-classicBorder/60">
-              <div className="flex flex-wrap items-center gap-3">
-                {/* 2단 핵심 ① - ⚡ 10초 순삭 미니 퀴즈 (크고 볼드형) */}
-                <button
-                  onClick={handleStartQuiz}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-classicRed text-white hover:bg-opacity-95 text-sm font-black rounded-xl shadow-md transition-all duration-300 transform active:scale-95 hover:shadow-lg shrink-0"
-                  style={{display: 'flex', alignItems: 'center'}}
-                >
-                  <span>⚡</span> 10초 순삭 미니 퀴즈
-                </button>
+            {/* 2행: 핵심 학습 도구 그룹 및 영역 필터/진도 배지 */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 pt-2 sm:pt-3 border-t border-dashed border-classicBorder/60">
+              {/* 핵심 액션: 모바일에서는 2열 그리드(동일 높이·너비), 데스크톱에서는 flex */}
+              <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 w-full sm:w-auto min-w-0">
+                <div className="flex items-center gap-2 w-full sm:w-auto min-w-0">
+                  {/* 핵심 ① - ⚡ 미니 퀴즈 */}
+                  <button
+                    onClick={handleStartQuiz}
+                    className="flex-1 sm:flex-initial flex items-center justify-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-2 sm:py-2.5 bg-classicRed text-white hover:bg-opacity-95 text-xs sm:text-sm font-black rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 hover:shadow-md whitespace-nowrap"
+                  >
+                    <span>⚡</span> <span>미니 퀴즈</span>
+                  </button>
 
-                {/* 2단 핵심 ② - 🖨️ PDF 단어장 인쇄 (크고 볼드형) */}
-                <button
-                  onClick={() => window.print()}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-classicBorder hover:border-classicRed hover:text-classicRed text-sm font-black rounded-xl shadow-sm transition-all duration-300 transform active:scale-95 shrink-0"
-                  style={{display: 'flex', alignItems: 'center'}}
-                >
-                  <span>🖨️</span> PDF 단어장 인쇄
-                </button>
+                  {/* 핵심 ② - 🖨️ 단어장 인쇄 */}
+                  <button
+                    onClick={() => window.print()}
+                    className="flex-1 sm:flex-initial flex items-center justify-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-2 sm:py-2.5 bg-white border border-classicBorder hover:border-classicRed hover:text-classicRed text-xs sm:text-sm font-black rounded-xl shadow-sm transition-all duration-200 transform active:scale-95 whitespace-nowrap"
+                  >
+                    <span>🖨️</span> <span>단어장 인쇄</span>
+                  </button>
+                </div>
 
-                {/* 2단 핵심 ③ - 🔄 학습 기록 초기화 */}
+                {/* 🔄 학습 기록 초기화 (보조 액션: 모바일에서 대형 버튼으로 자리를 차지하지 않도록 컴팩트 배치) */}
                 {passedWords.length > 0 && (
                   <button
                     onClick={handleResetPassed}
-                    className="flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-classicRed/20 text-classicRed hover:bg-classicRed/5 text-sm font-black rounded-xl shadow-sm transition-all duration-300 transform active:scale-95 shrink-0"
-                    style={{display: 'flex', alignItems: 'center'}}
+                    className="self-end sm:self-center text-[10px] sm:text-xs text-classicMuted hover:text-classicRed px-2 py-1 rounded-lg hover:bg-classicRed/5 border border-transparent hover:border-classicRed/20 transition-all font-semibold flex items-center gap-1 shrink-0"
+                    title="학습 완료 기록을 모두 초기화합니다"
                   >
-                    <span>🔄</span> 학습 기록 초기화 ({passedWords.length}개 완료)
+                    <span>🔄</span> 기록 초기화 ({passedWords.length}개)
                   </button>
                 )}
               </div>
 
-              {/* 2단 우측 - 듀얼 세그먼트 필터 및 상태 정보 배지 */}
-              <div className="flex flex-wrap items-center gap-3 ml-auto">
-                {/* Top Segmented Filter Tabs */}
-                <div className="flex bg-white border border-classicBorder p-1 rounded-full text-xs font-bold gap-1 shadow-inner shrink-0" style={{display: 'flex', padding: '3px', borderRadius: '9999px'}}>
+              {/* 2단 우측 - 영역 필터(전체/추리논증/언어이해) 및 진도 표시 */}
+              <div className="flex items-center justify-between sm:justify-end gap-1.5 sm:gap-3 w-full sm:w-auto">
+                {/* Segmented Filter Tabs: 전체 / 추리논증 / 언어이해 (모바일 1줄 유지) */}
+                <div className="flex bg-white border border-classicBorder p-0.5 rounded-full text-[10px] sm:text-xs font-bold gap-0.5 shadow-inner shrink-0">
                   {[
-                    { label: "전체 보기", val: "전체" },
+                    { label: "전체", val: "전체" },
                     { label: "추리논증", val: "추리논증" },
                     { label: "언어이해", val: "언어이해" }
                   ].map(item => {
@@ -1125,15 +1183,7 @@
                           setSelectedClassicalFilter(item.val);
                           setSelectedCategory("전체보기");
                         }}
-                        className={"px-3.5 py-1.5 rounded-full transition-all duration-300 " + (isActive ? "bg-classicRed text-white shadow-sm font-black" : "text-classicMuted hover:text-classicText")}
-                        style={{
-                          paddingLeft: '14px',
-                          paddingRight: '14px',
-                          paddingTop: '6px',
-                          paddingBottom: '6px',
-                          borderRadius: '9999px',
-                          transition: 'all 0.3s'
-                        }}
+                        className={"px-2 sm:px-3.5 py-1 sm:py-1.5 rounded-full transition-all duration-200 whitespace-nowrap " + (isActive ? "bg-classicRed text-white shadow-sm font-black" : "text-classicMuted hover:text-classicText")}
                       >
                         {item.label}
                       </button>
@@ -1141,55 +1191,15 @@
                   })}
                 </div>
 
-                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#4F62B3]/5 border border-[#4F62B3]/15 text-[#4F62B3] shrink-0" style={{display: 'inline-flex', alignItems: 'center'}}>
+                {/* 진도 표시 배지 (모바일 압축, 1줄 유지) */}
+                <span className="inline-flex items-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold bg-[#4F62B3]/5 border border-[#4F62B3]/15 text-[#4F62B3] shrink-0 whitespace-nowrap">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#4F62B3] animate-pulse"></span>
-                  남은 어휘 {baseKeys.length}개 / 완료 {passedWords.length}개
+                  <span className="sm:hidden">남은 {baseKeys.length} / 완료 {passedWords.length}</span>
+                  <span className="hidden sm:inline">남은 어휘 {baseKeys.length}개 / 완료 {passedWords.length}개</span>
                 </span>
               </div>
             </div>
           </header>
-
-          {/* Today's Recommendation Section */}
-          <section className="flex flex-col items-center justify-center gap-6 max-w-2xl mx-auto w-full my-4">
-            <div className="text-center">
-              <h2 className="text-3xl md:text-4xl font-serif font-black tracking-tight mb-2 text-classicText">
-                오늘의 <span className="text-classicRed font-serif">추천 어휘</span>
-              </h2>
-              <p className="text-classicMuted text-sm">
-                새로고침할 때마다 리트(LEET) 필수 기출 어휘 중 하나를 임의로 선정합니다.
-              </p>
-            </div>
-
-            {todayWord && (
-              <div 
-                onClick={() => selectAndScrollToWord(todayWord)}
-                className="classic-card rounded-2xl p-6 md:p-8 w-full border border-classicBorder shadow-classic hover:shadow-classic-hover hover:border-classicRed/20 transition-all duration-300 cursor-pointer group flex flex-col sm:flex-row items-center justify-between gap-6 bg-classicCard relative overflow-hidden"
-              >
-                <div className="absolute -right-16 -top-16 w-32 h-32 rounded-full bg-classicRed/5 blur-xl pointer-events-none group-hover:opacity-10 transition-all duration-300"></div>
-                
-                <div className="space-y-3 flex-1 text-center sm:text-left">
-                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
-                    <span className="text-3xl md:text-4xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors">
-                      {cleanWordText(todayWord.word)}
-                    </span>
-                    <span className="text-lg font-serif text-classicMuted bg-classicBg border border-classicBorder px-2.5 py-0.5 rounded-lg">
-                      {todayWord.hanja}
-                    </span>
-                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-classicRed/10 border border-classicRed/20 text-classicRed">
-                      {todayWord.category || todayWord.type}
-                    </span>
-                  </div>
-                  <p className="text-sm font-medium text-classicText leading-relaxed italic">
-                    “{todayWord.brief}”
-                  </p>
-                </div>
-
-                <div className="shrink-0 flex items-center gap-1.5 text-xs font-bold text-classicMuted group-hover:text-classicRed transition-all">
-                  상세 학습하기 <ArrowRightIcon className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-                </div>
-              </div>
-            )}
-          </section>
 
           {selectedWord ? (
             <div className={`space-y-8 transition-all duration-300 ${isClosingDetail ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
@@ -1579,54 +1589,69 @@
               </section>
             </div>
           ) : (
-            // Empty Search State / Welcome Screen with 'Today's Recommended LEET Words'
-            <div className="flex flex-col gap-10 w-full max-w-5xl mx-auto mt-4">
+            // Word List View
+            <div className="w-full min-w-0 flex flex-col gap-5 sm:gap-7 max-w-6xl mx-auto">
               
-              {/* Main Welcome banner */}
-              <div className="classic-card rounded-3xl p-8 md:p-10 text-center flex flex-col items-center justify-center gap-4 border border-classicBorder shadow-md relative overflow-hidden">
-                <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#6C4EB3]/5 blur-3xl pointer-events-none"></div>
-                
-                {/* Traditional Square Logo Badge */}
-                <div className="w-14 h-14 rounded-sm bg-[#6C4EB3] flex items-center justify-center font-serif font-black text-white text-2xl shadow-md animate-float" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                  한
-                </div>
+              {/* 오늘의 추천 어휘 - 컴팩트 슬림 카드 */}
+              {todayWord && (
+                <div 
+                  onClick={() => selectAndScrollToWord(todayWord)}
+                  className="classic-card rounded-xl sm:rounded-2xl p-3 sm:p-4 md:p-5 w-full border border-classicBorder shadow-sm hover:shadow-classic-hover hover:border-classicRed/20 transition-all duration-300 cursor-pointer group flex items-center justify-between gap-2 sm:gap-3 bg-white relative overflow-hidden"
+                >
+                  <div className="flex items-center gap-2 sm:gap-3 min-w-0 truncate">
+                    <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded bg-classicRed/10 border border-classicRed/20 text-classicRed shrink-0 whitespace-nowrap">
+                      오늘의 추천
+                    </span>
+                    <span className="text-base sm:text-xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors shrink-0">
+                      {cleanWordText(todayWord.word)}
+                    </span>
+                    <span className="text-xs sm:text-sm font-serif text-classicMuted bg-classicBg border border-classicBorder px-1.5 py-0.5 rounded-lg shrink-0">
+                      {todayWord.hanja}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase px-2 py-0.5 rounded bg-classicBg border border-classicBorder text-classicMuted hidden md:inline shrink-0">
+                      {todayWord.category || todayWord.type}
+                    </span>
+                    <p className="text-xs text-classicMuted leading-relaxed italic truncate hidden lg:block">
+                      “{todayWord.brief}”
+                    </p>
+                  </div>
 
-                <div className="space-y-2">
-                  <h3 className="text-2xl md:text-3xl font-serif font-black text-classicText tracking-tight">한자를 알면 리트(LEET)가 쉬워</h3>
-                  <p className="text-sm text-classicMuted leading-relaxed max-w-2xl mx-auto font-medium">
-                    LEET 언어이해 및 추리논증 지문에서 정밀한 독해가 지체되고 선지 판단의 엄밀함이 흔들리는 원인 중 하나는 고난도 개념 한자어의 속뜻을 직관적으로 관통하지 못하기 때문입니다.
-                    아래 기출 표제어 범주를 탐색하며, 실제 시험 문맥과 낱글자 속뜻의 긴밀한 유기적 연결고리를 포착해 보십시오.
+                  <div className="shrink-0 flex items-center justify-end gap-1 text-[11px] sm:text-xs font-bold text-classicMuted group-hover:text-classicRed transition-all whitespace-nowrap">
+                    <span>상세<span className="hidden xs:inline"> 학습하기</span></span> <ArrowRightIcon className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                  </div>
+                </div>
+              )}
+
+              {/* Main Welcome banner: 데스크톱/태블릿에서는 간결한 안내 배너, 모바일에서는 스크롤 절약을 위해 숨김 */}
+              <div className="hidden sm:flex classic-card rounded-2xl p-5 md:p-6 text-center flex-col items-center justify-center gap-2 border border-classicBorder shadow-sm relative overflow-hidden">
+                <div className="space-y-1">
+                  <h3 className="text-lg md:text-xl font-serif font-black text-classicText tracking-tight">
+                    한자를 알면 리트(LEET)가 쉬워
+                  </h3>
+                  <p className="text-xs text-classicMuted leading-relaxed max-w-2xl mx-auto font-medium">
+                    LEET 언어이해 및 추리논증 지문에서 정확한 독해와 선지 판단을 돕는 373개 핵심 기출 어휘를 학습해 보세요.
                   </p>
                 </div>
               </div>
 
-              {/* Today's Recommended Words Section */}
-              <div className="space-y-6">
+              {/* 검색 및 필터 영역 */}
+              <div className="w-full min-w-0 space-y-4 sm:space-y-5">
                 
-                {/* Category Filtering Tabs */}
-                <div className="flex flex-col gap-4 border-b border-classicBorder pb-5">
-                  <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                    <h3 className="text-lg font-serif font-black text-classicText flex items-center gap-2" style={{display: 'flex', alignItems: 'center'}}>
-                      <span className="w-2 h-2 rounded-full bg-classicRed animate-pulse"></span>
-                      오늘의 추천 리트 기출 한자어
-                    </h3>
-                    <span className="text-xs text-classicMuted font-semibold">범주를 선택하거나 검색해서 학습하십시오</span>
-                  </div>
-
-                  {/* 단어 검색창 */}
-                  <div className="relative w-full sm:max-w-sm" style={{position: 'relative'}}>
-                    <SearchIcon className="w-4 h-4 text-classicMuted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                <div className="w-full min-w-0 flex flex-col gap-3 sm:gap-4 border-b border-classicBorder pb-4 sm:pb-5">
+                  {/* 단어 검색창 (모바일 100%, 넉넉한 터치 영역, 삭제 버튼) */}
+                  <div className="relative w-full">
+                    <SearchIcon className="w-4 h-4 sm:w-5 sm:h-5 text-classicMuted absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                     <input
                       type="text"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      placeholder="단어, 한자, 뜻으로 검색 (예: 소급, 遡及)"
-                      className="w-full pl-9 pr-9 py-2.5 bg-white border border-classicBorder rounded-xl text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed placeholder-classicMuted/70"
+                      placeholder="단어, 한자, 뜻으로 검색 (예: 소급, 遡及, 효력)"
+                      className="w-full pl-10 sm:pl-11 pr-10 py-2.5 sm:py-3 bg-white border border-classicBorder hover:border-classicRed/40 rounded-xl sm:rounded-2xl text-sm sm:text-base text-classicText focus:outline-none focus:border-classicRed focus:ring-2 focus:ring-classicRed/10 placeholder-classicMuted/70 shadow-sm transition-all"
                     />
                     {searchTerm && (
                       <button
                         onClick={() => setSearchTerm("")}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-classicMuted hover:text-classicRed text-xs font-bold"
+                        className="absolute right-3.5 top-1/2 -translate-y-1/2 w-6 h-6 rounded-full bg-classicBg hover:bg-classicRed/10 text-classicMuted hover:text-classicRed flex items-center justify-center text-xs font-bold transition-colors"
                         title="검색어 지우기"
                       >
                         ✕
@@ -1634,36 +1659,40 @@
                     )}
                   </div>
 
-                  <div className="flex flex-wrap items-center gap-2">
+                  {/* 유형 카테고리 필터 Tabs: 모바일 가로 스크롤 가능한 pill row (no-scrollbar), 데스크톱 flex-wrap */}
+                  <div className="w-full min-w-0 max-w-full flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-1 sm:flex-wrap">
                     {["전체보기", "구조 파악형", "개념 이해형", "의미 추론형", "전문용어 이해형", "법률기초"].map(cat => {
                       const isActive = selectedCategory === cat;
-                      let activeStyle = 'bg-classicText text-white border-classicText';
+                      let activeStyle = 'bg-classicText text-white border-classicText shadow-sm';
                       if (cat !== '전체보기' && CATEGORY_COLORS[cat]) {
                         activeStyle = CATEGORY_COLORS[cat].tabActive;
                       } else if (cat === '전체보기') {
                         activeStyle = 'bg-classicRed text-white border-classicRed shadow-sm';
                       }
 
+                      const count = cat === '전체보기' 
+                        ? baseKeys.length 
+                        : baseKeys.filter(k => MOCK_WORDS[k].category === cat || MOCK_WORDS[k].type === cat).length;
+
                       return (
                         <button
                           key={cat}
                           onClick={() => setSelectedCategory(cat)}
-                          className={"px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-1.5 " + (isActive ? activeStyle : "bg-white border-classicBorder text-classicMuted hover:border-classicRed/30 hover:text-classicRed")}
+                          className={"px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 whitespace-nowrap shrink-0 " + (isActive ? activeStyle : "bg-white border-classicBorder text-classicMuted hover:border-classicRed/30 hover:text-classicRed")}
                         >
                           {cat !== '전체보기' && getCategoryIcon(cat, "w-3.5 h-3.5")}
-                          {cat} ({
-                            cat === '전체보기' 
-                              ? baseKeys.length 
-                              : baseKeys.filter(k => MOCK_WORDS[k].category === cat || MOCK_WORDS[k].type === cat).length
-                          })
+                          <span>{cat}</span>
+                          <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-medium ${isActive ? 'bg-white/20 text-white' : 'bg-classicBg text-classicMuted'}`}>
+                            {count}
+                          </span>
                         </button>
                       );
                     })}
 
-                    {/* 정렬 토글 버튼 */}
+                    {/* 기출 빈도순 보기 토글 버튼 */}
                     <button 
                       onClick={() => setSortByFrequency(prev => !prev)}
-                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-1.5 ${sortByFrequency ? 'bg-amber-500 text-white border-amber-500 shadow-sm hover:bg-amber-600' : 'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100 hover:border-amber-300'}`}
+                      className={`px-3 sm:px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 border flex items-center gap-1.5 whitespace-nowrap shrink-0 ${sortByFrequency ? 'bg-amber-500 text-white border-amber-500 shadow-sm hover:bg-amber-600' : 'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100 hover:border-amber-300'}`}
                     >
                       🔥 {sortByFrequency ? '기출 빈도순 정렬 중' : '기출 빈도순 보기'}
                     </button>
@@ -1672,7 +1701,7 @@
 
                 {/* Cards Grid */}
                 {sortedAndFilteredWords.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                     {sortedAndFilteredWords.map(key => {
                       const wordData = MOCK_WORDS[key];
                       const color = CATEGORY_COLORS[wordData.category || wordData.type] || {
@@ -1688,7 +1717,7 @@
                         <div
                           key={key}
                           onClick={() => selectAndScrollToWord(wordData)}
-                          className={"classic-card rounded-2xl p-6 flex flex-col justify-between gap-4 cursor-pointer border border-classicBorder shadow-sm hover:-translate-y-1.5 hover:shadow-classic-hover hover:border-classicRed/20 group relative transition-all duration-500 ease-out " + (isFading ? "opacity-0 scale-75 -translate-y-4 blur-[1px] pointer-events-none" : "opacity-100 scale-100 translate-y-0")}
+                          className={"classic-card rounded-2xl p-5 sm:p-6 flex flex-col justify-between gap-3.5 sm:gap-4 cursor-pointer border border-classicBorder shadow-sm hover:-translate-y-1 hover:shadow-classic-hover hover:border-classicRed/30 group relative transition-all duration-300 ease-out " + (isFading ? "opacity-0 scale-75 -translate-y-4 blur-[1px] pointer-events-none" : "opacity-100 scale-100 translate-y-0")}
                         >
                           {/* 다 외웠어요 패스 단추 */}
                           <button
@@ -1704,25 +1733,25 @@
                             {isFading ? "✅" : "👁️"}
                           </button>
 
-                          <div className="space-y-3">
-                            <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                              <span className={"text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border flex items-center gap-1 " + color.badge}>
+                          <div className="space-y-2.5 sm:space-y-3">
+                            <div className="flex items-center justify-between pr-9">
+                              <span className={"text-[10px] sm:text-[11px] font-bold uppercase px-2.5 py-0.5 rounded-lg border flex items-center gap-1 " + color.badge}>
                                 {getCategoryIcon(wordData.category || wordData.type, "w-3 h-3")}
                                 {wordData.category || wordData.type}
                               </span>
-                              <span className="text-[10px] text-classicMuted font-semibold mr-8">
+                              <span className="text-[10px] sm:text-[11px] text-classicMuted font-semibold">
                                 기출 {wordData.contexts.length}건
                               </span>
                             </div>
                             
-                            <h4 className="text-2xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors flex items-baseline gap-2">
+                            <h4 className="text-xl sm:text-2xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors flex items-baseline gap-2">
                               {cleanWordText(wordData.word)} 
-                              <span className="text-xs font-normal text-classicMuted font-sans">
+                              <span className="text-xs sm:text-sm font-serif font-normal text-classicMuted">
                                 ({wordData.hanja})
                               </span>
                             </h4>
                             
-                            <p className="text-xs text-classicMuted leading-relaxed font-medium">
+                            <p className="text-xs text-classicMuted leading-relaxed font-medium line-clamp-2">
                               {wordData.brief}
                             </p>
 
@@ -1743,7 +1772,7 @@
                               const currentCtx = uniqueContexts[safeActiveIdx] || uniqueContexts[0];
 
                               return (
-                                <div className="mt-2 pt-2 border-t border-classicBorder/40 space-y-2">
+                                <div className="mt-2 pt-2 border-t border-classicBorder/40 space-y-1.5">
                                   {/* Tabs */}
                                   {uniqueContexts.length > 1 && (
                                     <div className="flex flex-wrap gap-1">
@@ -1772,7 +1801,7 @@
                                   
                                   {/* Context Description */}
                                   {currentCtx && (
-                                    <p className="text-[11px] text-classicText leading-relaxed font-medium bg-classicBg/60 p-2 rounded border border-classicBorder/30 italic">
+                                    <p className="text-[11px] text-classicText leading-relaxed font-medium bg-classicBg/60 p-2 rounded-xl border border-classicBorder/30 italic">
                                       🔍 {renderContentWithBold(currentCtx.desc || currentCtx.content)}
                                     </p>
                                   )}
@@ -1781,8 +1810,9 @@
                             })()}
                           </div>
 
-                          <div className="flex justify-end pt-3 border-t border-classicBorder/50" style={{display: 'flex', justifyContent: 'flex-end'}}>
-                            <span className="text-[10px] font-bold text-classicMuted group-hover:text-classicRed transition-all flex items-center gap-1" style={{display: 'flex', alignItems: 'center'}}>
+                          <div className="flex justify-between items-center pt-2.5 border-t border-classicBorder/50 text-[10px] text-classicMuted font-medium">
+                            <span>LEET 기출 지문</span>
+                            <span className="text-[11px] font-bold text-classicMuted group-hover:text-classicRed transition-all flex items-center gap-1">
                               상세 학습 <ArrowRightIcon className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
                             </span>
                           </div>

@@ -5,8 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>효과적인 학습법 가이드 | 한알국쉬(리트버전)</title>
   
-  <!-- SEO Meta Tags -->
+  <!-- SEO & Canonical Tags -->
+  <link rel="canonical" href="https://leet.easyhanja.org/guide.html">
   <meta name="description" content="한알국쉬(리트버전) 플랫폼의 4대 핵심 학습 엔진(아는 단어 패스, 실시간 한자 토글, 미니 퀴즈, A4 PDF 인쇄)을 이용한 고등급 LEET 문맥 회독 학습법 가이드라인.">
+  <meta name="author" content="백진우">
+
+  <!-- OpenGraph Meta Tags -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://leet.easyhanja.org/guide.html">
+  <meta property="og:site_name" content="한알국쉬">
+  <meta property="og:title" content="효과적인 학습법 가이드 | 한알국쉬(리트버전)">
+  <meta property="og:description" content="한알국쉬 리트버전 효과적인 학습법 가이드">
+  <meta property="og:locale" content="ko_KR">
   
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,22 +51,25 @@
   <div class="max-w-4xl mx-auto px-4 py-12 flex flex-col gap-10 min-h-screen">
     
     <!-- Header -->
-    <header class="flex items-center justify-between border-b border-classicBorder pb-6">
-      <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 bg-classicRed flex items-center justify-center text-white font-serif font-black text-lg select-none rounded-sm transition-transform group-hover:scale-105">
+    <header class="flex items-center justify-between border-b border-classicBorder pb-5 sm:pb-6">
+      <a href="index.html" class="flex items-center gap-2.5 sm:gap-3 group">
+        <div class="w-8 h-8 sm:w-9 sm:h-9 bg-classicRed flex items-center justify-center text-white font-serif font-black text-sm sm:text-base select-none shadow-sm rounded-lg transition-transform group-hover:scale-105">
           한
         </div>
         <div>
-          <h2 class="text-xl font-serif font-black tracking-tight text-classicText">한알국쉬(리트버전)</h2>
-          <p class="text-[10px] text-classicMuted font-medium tracking-wide">한자를 알면 리트(LEET)가 쉬워</p>
+          <div class="flex items-center gap-1.5 sm:gap-2">
+            <h2 class="text-lg sm:text-xl font-serif font-black tracking-tight text-classicText">한알국쉬</h2>
+            <span class="text-[10px] sm:text-xs px-1.5 sm:px-2 py-0.5 rounded-full bg-[#6C4EB3]/10 text-[#6C4EB3] font-bold border border-[#6C4EB3]/20">LEET</span>
+          </div>
+          <p class="text-[10px] sm:text-xs text-classicMuted font-serif font-medium tracking-wide mt-0.5">한자를 알면 리트(LEET)가 쉬워</p>
         </div>
       </a>
       
       <a 
         href="index.html" 
-        class="px-4 py-2 border border-classicBorder hover:border-classicRed/20 hover:text-classicRed text-xs font-bold rounded-xl bg-white transition-all shadow-sm"
+        class="px-3 sm:px-4 py-2 border border-classicBorder hover:border-classicRed hover:text-classicRed text-xs font-bold rounded-xl bg-white transition-all shadow-sm"
       >
-        🏠 메인 화면으로 돌아가기
+        🏠 <span class="hidden xs:inline">메인 화면으로 </span>돌아가기
       </a>
     </header>
 
