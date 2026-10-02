@@ -628,33 +628,56 @@
       const [isQuizFinished, setIsQuizFinished] = useState(false);
 
       const handleStartQuiz = () => {
-        const keys = Object.keys(MOCK_WORDS);
-        if (keys.length < 5) {
+        // 퀴즈 출제 가능한 어휘 필터링: 한자가 존재하고 공백이 아닌 어휘만 정답 및 오답 후보군으로 선정
+        const eligibleKeys = Object.keys(MOCK_WORDS).filter(k => {
+          const w = MOCK_WORDS[k];
+          return w && w.hanja && w.hanja.trim() !== "";
+        });
+
+        if (eligibleKeys.length < 5) {
           alert("퀴즈를 생성하기 위한 어휘 데이터가 부족합니다.");
           return;
         }
         
         // 5개 단어를 랜덤하게 셔플
-        const shuffledKeys = [...keys].sort(() => 0.5 - Math.random());
+        const shuffledKeys = [...eligibleKeys].sort(() => 0.5 - Math.random());
         const selectedKeys = shuffledKeys.slice(0, 5);
         
         const questions = selectedKeys.map(key => {
           const correctWord = MOCK_WORDS[key];
-          const correctHanja = correctWord.hanja;
+          const correctHanja = correctWord.hanja.trim();
           const cleanCorrectWord = cleanWordText(correctWord.word);
+          const correctLabel = `${cleanCorrectWord}(${correctHanja})`;
           
-          // 오답 한자 4개 선택 (정답 한자와 중복되지 않음)
+          // 오답 4개 선택 (정답 한자와 중복되지 않음)
+          const incorrectOptions = [];
           const incorrectHanjas = [];
-          while (incorrectHanjas.length < 4) {
-            const rKey = keys[Math.floor(Math.random() * keys.length)];
+          while (incorrectOptions.length < 4) {
+            const rKey = eligibleKeys[Math.floor(Math.random() * eligibleKeys.length)];
             const rWord = MOCK_WORDS[rKey];
-            if (rWord.hanja !== correctHanja && !incorrectHanjas.includes(rWord.hanja)) {
-              incorrectHanjas.push(rWord.hanja);
+            const rHanja = rWord.hanja.trim();
+            if (rKey !== key && rHanja !== correctHanja && !incorrectHanjas.includes(rHanja)) {
+              incorrectHanjas.push(rHanja);
+              const cleanRWord = cleanWordText(rWord.word);
+              const rLabel = `${cleanRWord}(${rHanja})`;
+              incorrectOptions.push({
+                key: rKey,
+                hanja: rHanja,
+                word: cleanRWord,
+                label: rLabel
+              });
             }
           }
           
+          const correctOption = {
+            key: key,
+            hanja: correctHanja,
+            word: cleanCorrectWord,
+            label: correctLabel
+          };
+
           // 정답 + 오답 셔플하여 5개 선지 구성
-          const options = [correctHanja, ...incorrectHanjas].sort(() => 0.5 - Math.random());
+          const options = [correctOption, ...incorrectOptions].sort(() => 0.5 - Math.random());
           
           // 지문 문맥 획득
           const contextObj = correctWord.contexts && correctWord.contexts[0];
@@ -664,6 +687,7 @@
             key: key,
             word: cleanCorrectWord,
             correctHanja: correctHanja,
+            correctLabel: correctLabel,
             brief: correctWord.brief,
             definition: correctWord.definition,
             context: contextText,
@@ -683,7 +707,11 @@
         if (selectedOptionIndex !== null) return;
         setSelectedOptionIndex(optIdx);
         const question = quizQuestions[currentQuizIndex];
-        if (question.options[optIdx] === question.correctHanja) {
+        const selectedOpt = question.options[optIdx];
+        const isCorrect = typeof selectedOpt === 'object'
+          ? (selectedOpt.key && question.key ? selectedOpt.key === question.key : selectedOpt.hanja === question.correctHanja)
+          : (selectedOpt === question.correctHanja);
+        if (isCorrect) {
           setQuizScore(prev => prev + 1);
         }
       };
@@ -1885,7 +1913,10 @@
                         <div className="flex flex-col gap-2.5">
                           {question.options.map((opt, oIdx) => {
                             const isSelected = selectedOptionIndex === oIdx;
-                            const isCorrectOpt = opt === question.correctHanja;
+                            const optLabel = typeof opt === 'object' ? opt.label : opt;
+                            const isCorrectOpt = typeof opt === 'object'
+                              ? (opt.key && question.key ? opt.key === question.key : opt.hanja === question.correctHanja)
+                              : (opt === question.correctHanja);
                             const hasAnswered = selectedOptionIndex !== null;
                             
                             let btnStyle = "bg-white border-classicBorder hover:border-classicRed/30 hover:bg-classicBg/30 text-classicText";
@@ -1904,17 +1935,17 @@
                                 key={oIdx}
                                 onClick={() => handleSelectOption(oIdx)}
                                 disabled={hasAnswered}
-                                className={`w-full text-left p-4 rounded-2xl border text-sm transition-all flex items-center justify-between ${btnStyle}`}
+                                className={`w-full text-left p-3.5 sm:p-4 rounded-2xl border text-sm transition-all flex items-center justify-between gap-3 ${btnStyle}`}
                                 style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
                               >
-                                <span className="font-serif tracking-widest text-base">
-                                  {oIdx + 1}. {opt}
+                                <span className="font-serif tracking-normal text-sm sm:text-base break-keep">
+                                  {oIdx + 1}. {optLabel}
                                 </span>
                                 {hasAnswered && (
                                   isCorrectOpt ? (
-                                    <span className="text-green-600 font-bold text-xs">🎉 정답</span>
+                                    <span className="text-green-600 font-bold text-xs shrink-0">🎉 정답</span>
                                   ) : isSelected ? (
-                                    <span className="text-red-600 font-bold text-xs">❌ 오답</span>
+                                    <span className="text-red-600 font-bold text-xs shrink-0">❌ 오답</span>
                                   ) : null
                                 )}
                               </button>
@@ -1926,15 +1957,23 @@
                         {selectedOptionIndex !== null && (
                           <div className="p-5 bg-classicBg/60 border border-classicBorder rounded-2xl space-y-2 animate-fade-in">
                             <div className="flex items-center gap-2">
-                              <span className={`text-xs font-bold uppercase px-2.5 py-0.5 rounded border ${
-                                question.options[selectedOptionIndex] === question.correctHanja
-                                  ? "bg-green-500/10 text-green-700 border-green-500/20"
-                                  : "bg-red-500/10 text-red-700 border-red-500/20"
-                              }`}>
-                                {question.options[selectedOptionIndex] === question.correctHanja ? "정답 피드백" : "오답 피드백"}
-                              </span>
+                              {(() => {
+                                const selectedOpt = question.options[selectedOptionIndex];
+                                const isCurrentCorrect = typeof selectedOpt === 'object'
+                                  ? (selectedOpt.key && question.key ? selectedOpt.key === question.key : selectedOpt.hanja === question.correctHanja)
+                                  : (selectedOpt === question.correctHanja);
+                                return (
+                                  <span className={`text-xs font-bold uppercase px-2.5 py-0.5 rounded border ${
+                                    isCurrentCorrect
+                                      ? "bg-green-500/10 text-green-700 border-green-500/20"
+                                      : "bg-red-500/10 text-red-700 border-red-500/20"
+                                  }`}>
+                                    {isCurrentCorrect ? "정답 피드백" : "오답 피드백"}
+                                  </span>
+                                );
+                              })()}
                               <span className="text-xs text-classicMuted font-bold">
-                                해답: {question.correctHanja} ({cleanWordText(question.word)})
+                                해답: {question.correctLabel || (question.correctHanja ? `${cleanWordText(question.word)}(${question.correctHanja})` : cleanWordText(question.word))}
                               </span>
                             </div>
                             <p className="text-sm font-serif font-black text-classicText">
