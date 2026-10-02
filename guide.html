@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>효과적인 학습법 가이드 | 한알국쉬(리트버전)</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="한알국쉬(리트버전) 플랫폼의 4대 핵심 학습 엔진(아는 단어 패스, 실시간 한자 토글, 미니 퀴즈, A4 PDF 인쇄)을 이용한 고등급 LEET 문맥 회독 학습법 가이드라인.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            classicBg: '#F5F2FA',
+            classicText: '#252030',
+            classicRed: '#6C4EB3',
+            classicBorder: '#E3DCF0',
+            classicMuted: '#7F7790',
+            classicTeal: '#4F62B3'
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Noto Sans KR', 'sans-serif'],
+            serif: ['Noto Serif KR', 'Georgia', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-classicBg text-classicText font-sans min-h-screen selection:bg-classicRed selection:text-white antialiased">
+
+  <div class="max-w-4xl mx-auto px-4 py-12 flex flex-col gap-10 min-h-screen">
+    
+    <!-- Header -->
+    <header class="flex items-center justify-between border-b border-classicBorder pb-6">
+      <a href="index.html" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 bg-classicRed flex items-center justify-center text-white font-serif font-black text-lg select-none rounded-sm transition-transform group-hover:scale-105">
+          한
+        </div>
+        <div>
+          <h2 class="text-xl font-serif font-black tracking-tight text-classicText">한알국쉬(리트버전)</h2>
+          <p class="text-[10px] text-classicMuted font-medium tracking-wide">한자를 알면 리트(LEET)가 쉬워</p>
+        </div>
+      </a>
+      
+      <a 
+        href="index.html" 
+        class="px-4 py-2 border border-classicBorder hover:border-classicRed/20 hover:text-classicRed text-xs font-bold rounded-xl bg-white transition-all shadow-sm"
+      >
+        🏠 메인 화면으로 돌아가기
+      </a>
+    </header>
+
+    <!-- Main Content -->
+    <main class="space-y-8 bg-white rounded-3xl p-8 border border-classicBorder shadow-sm">
+      
+      <div class="border-b border-classicBorder pb-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-classicTeal bg-classicTeal/10 border border-classicTeal/20 px-2.5 py-0.5 rounded">
+          학습 가이드 (Guide)
+        </span>
+        <h1 class="text-3xl font-serif font-black text-classicText mt-3">
+          4대 핵심 학습 엔진 200% 활용법
+        </h1>
+        <p class="text-xs text-classicMuted mt-1">한알국쉬(리트버전) 플랫폼 활용을 통한 비약적 회독력 향상 방법론</p>
+      </div>
+
+      <!-- 가이드라인 서식 본문 -->
+      <article class="space-y-8 leading-relaxed text-sm font-medium text-classicText/90">
+        
+        <!-- 📖 한알국쉬 완벽 활용 가이드 -->
+        <section class="space-y-5 bg-classicBg/30 rounded-3xl p-6 border border-classicBorder/55 shadow-sm">
+          <h2 class="text-2xl font-serif font-black text-classicText flex items-center gap-2 border-b border-classicBorder pb-3">
+            <span>📖</span> 한알국쉬 완벽 활용 가이드
+          </h2>
+          
+          <div class="space-y-6">
+            <div class="space-y-1">
+              <h3 class="font-serif font-bold text-classicText flex items-center gap-1.5 text-base">
+                <span>1️⃣</span> 카테고리별 맞춤 학습
+              </h3>
+              <ul class="list-disc pl-5 space-y-1 text-xs text-classicMuted leading-relaxed">
+                <li><strong>[전체]</strong>: LEET 기출 어휘와 법률 기초 용어를 통합하여 종합적인 어휘력을 점검합니다.</li>
+                <li><strong>[기초어휘]</strong>: 인문·사회·철학 지문에 자주 등장하는 필수 한자어 및 핵심 기출 어휘를 집중 학습합니다. (구조/개념/의미/전문 유형 등)</li>
+                <li><strong>[법률기초]</strong>: 법학적성시험 규범 이해의 바탕이 되는 법제처 검증 공식 법률 용어를 학습합니다.</li>
+              </ul>
+            </div>
+
+            <div class="space-y-1">
+              <h3 class="font-serif font-bold text-classicText flex items-center gap-1.5 text-base">
+                <span>2️⃣</span> 기출 빈도순 필터링
+              </h3>
+              <p class="text-xs text-classicMuted pl-5 leading-relaxed">
+                상단의 <strong>'기출 빈도순'</strong> 정렬 필터를 활용하여 실제 시험 출제 빈도가 높은 핵심 단어부터 효율적으로 회독하세요.
+              </p>
+            </div>
+
+            <div class="space-y-1">
+              <h3 class="font-serif font-bold text-classicText flex items-center gap-1.5 text-base">
+                <span>3️⃣</span> 낱자 분해 & 표준국어대사전 연동
+              </h3>
+              <ul class="list-disc pl-5 space-y-1 text-xs text-classicMuted leading-relaxed">
+                <li>단어 카드를 클릭하면 단어를 구성하는 한자 낱글자의 뜻과 음이 자동으로 펼쳐집니다.</li>
+                <li>용어의 상세한 용례와 문맥적 의미가 궁금할 때는 카드 하단의 <strong>'🌐 국립국어원 표준국어대사전 ↗'</strong> 버튼을 클릭해 즉시 조회하세요.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-serif font-bold text-classicText flex items-center gap-2 border-b border-classicBorder/50 pb-2">
+            🔑 엔진 ①: [👁️ 다 외웠어요] 아는 단어 패스 기능
+          </h2>
+          <div class="pl-4 border-l-2 border-classicRed/30 space-y-2">
+            <p><strong>활용 팁:</strong> 단어 카드의 우측 상단 👁️ 모양 버튼을 클릭하여 외운 단어를 대시보드 목록에서 숨길 수 있습니다.</p>
+            <p><strong>수험학적 효과:</strong> 매일 뇌를 자극하며 아는 단어를 지워가는 '소거식 성취감'을 경험해 보십시오. 브라우저 저장소(LocalStorage)에 자동 누적되므로 재접속 시에도 아직 외우지 못한 단어들만 연속성 있게 로딩되어 회독 속도가 비약적으로 단축됩니다. 다시 처음부터 회독을 돌리려면 상단 <code>[🔄 학습 기록 초기화]</code>를 누르면 됩니다.</p>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-serif font-bold text-classicText flex items-center gap-2 border-b border-classicBorder/50 pb-2">
+            🔑 엔진 ②: [漢 한자-한글 실시간 스위칭 토글]
+          </h2>
+          <div class="pl-4 border-l-2 border-classicTeal/30 space-y-2">
+            <p><strong>활용 팁:</strong> 상세 모달창 내부의 [기출 지문] 카드 우측 상단 <code>[漢 한자 보기]</code> 버튼을 클릭해 기출 본문 속 표제어를 실시간으로 한자 표기로 치환해 보십시오.</p>
+            <p><strong>수험학적 효과:</strong> 단순 국어 텍스트로 흘려 읽던 기출 문장을 한자어 자구 형태로 스위칭하여 머리에 충격(각인 효과)을 줍니다. 문맥 속에서 낱글자 한자가 어떻게 물리적으로 치환되어 작동하는지 3D 하이라이팅 트랜지션과 함께 직관적으로 체화하여, 실전 시험에서 한자 자구를 만났을 때 흐려지는 판단력을 벼려 줍니다.</p>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-serif font-bold text-classicText flex items-center gap-2 border-b border-classicBorder/50 pb-2">
+            🔑 엔진 ③: [⚡ 10초 순삭 미니 퀴즈] 자가 진단
+          </h2>
+          <div class="pl-4 border-l-2 border-classicRed/30 space-y-2">
+            <p><strong>활용 팁:</strong> 상단 필터 바 옆의 <code>[⚡ 10초 순삭 미니 퀴즈]</code> 버튼을 클릭하여 무작위 자동 출제되는 5개의 객관식 문항을 풀어 보십시오.</p>
+            <p><strong>수험학적 효과:</strong> 기출 지문에 뚫린 빈칸(<code> ______ </code>)을 보고 5지선다 선지 중에서 정밀한 한자 표기를 10초 안에 골라내는 긴장도 높은 미니 게임입니다. 오답을 클릭했을 시 하단에 사전적 정의가 슬라이드 표출되므로 자투리 시간에 어휘 구멍을 훌륭하게 메우며, 최종 스코어보드를 통해 자가 진단을 완수할 수 있습니다.</p>
+          </div>
+        </section>
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-serif font-bold text-classicText flex items-center gap-2 border-b border-classicBorder/50 pb-2">
+            🔑 엔진 ④: [🖨️ PDF 단어장 원클릭 인쇄] 아날로그 학습
+          </h2>
+          <div class="pl-4 border-l-2 border-classicTeal/30 space-y-2">
+            <p><strong>활용 팁:</strong> 상단 헤더 우측의 <code>[🖨️ PDF 단어장 인쇄]</code> 버튼을 클릭해 A4 단어장을 인쇄하거나 PDF로 저장해 소지하십시오.</p>
+            <p><strong>수험학적 효과:</strong> 웹의 잡다한 버튼이나 디자인 요소를 100% 소거하고, 수록된 전체 단어들이 가나다순으로 A4 2열 그리드 안에 명료하게 배치되어 출력됩니다. <code>page-break-inside: avoid;</code> 옵션이 탑재되어 페이지 경계선에서 카드가 끊기지 않고 책의 판형을 유지하므로, 아날로그 필기 및 시험장 직전 휴대 교재로 최적의 파트너가 되어 줍니다.</p>
+          </div>
+        </section>
+
+      </article>
+
+      <!-- Bottom Return Button -->
+      <div class="pt-6 border-t border-classicBorder flex justify-center">
+        <a 
+          href="index.html" 
+          class="inline-flex items-center gap-2 px-6 py-3 bg-classicRed text-white text-xs font-bold rounded-xl shadow-sm hover:bg-classicRed/95 hover:shadow transition-all duration-300 transform active:scale-95"
+        >
+          <span>🏠</span> 메인 화면으로 돌아가기
+        </a>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-classicBorder pt-8 text-center text-xs text-classicMuted space-y-2 pb-6">
+      <p>© 2026 한알국쉬(리트버전) & Hanalgukshi Compilation Committee. All rights reserved.</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>

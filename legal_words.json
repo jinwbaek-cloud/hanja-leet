@@ -1,0 +1,452 @@
+[
+  {
+    "id": "legal_001",
+    "word": "외환",
+    "hanja": "外換",
+    "category": "법률기초",
+    "definition": "외국과의 거래를 결제할 때 쓰는 환어음",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_002",
+    "word": "조정",
+    "hanja": "調定",
+    "category": "법률기초",
+    "definition": "조사하여 확실하고 견고하게 함",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_003",
+    "word": "교각",
+    "hanja": "橋脚",
+    "category": "법률기초",
+    "definition": "두 직선이 만나서 이루는 각/ 두 곡선이나 두 원의 접선이 만나서 이루는 각",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_004",
+    "word": "교회",
+    "hanja": "交會",
+    "category": "법률기초",
+    "definition": "서로 만남/ 한자리에 서로 모임",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_005",
+    "word": "수상",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "상을 받음",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_006",
+    "word": "가출",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "사건의 담임 재판부가 증거조사나 열람 등을 위해 압수물보관자로부터 압수물을 일시적으로 대출하는 것",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_007",
+    "word": "통제제도",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "O",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_008",
+    "word": "통관",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "하천시설물 통관",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_009",
+    "word": "수정",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "암수의 생식 세포가 하나로 합쳐져 접합자가 됨. 또는 그런 현상.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_010",
+    "word": "대전",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "광역시",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_011",
+    "word": "녹화",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "산이나 들 따위에 나무나 화초를 심어 푸르게 함.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_012",
+    "word": "구상",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "무역 거래에서",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_013",
+    "word": "해",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "이롭지 아니하게 하거나 손상을 입힘. 또는 그런 것.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_014",
+    "word": "당무",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "정당의 사무",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_015",
+    "word": "청인",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "관공서를 나타내는 도장",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_016",
+    "word": "무인",
+    "hanja": "指紋",
+    "category": "법률기초",
+    "definition": "도장을 대신하여 손가락에 인주 따위를 묻혀 그 지문을 찍은 것.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_017",
+    "word": "사인",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "개인 자격으로서의 사람.私人",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_018",
+    "word": "합당",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "당을 합함.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_019",
+    "word": "특허",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "형성적 행정 행위의 하나. 특정인에 대하여 새로운 일정한 권리",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_020",
+    "word": "영사",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "o",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_021",
+    "word": "서류",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "글자로 기록한 문서를 통틀어 이르는 말.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_022",
+    "word": "선적",
+    "hanja": "船籍",
+    "category": "법률기초",
+    "definition": "배의 국적",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_023",
+    "word": "차",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "바퀴가 굴러서 나아가게 되어 있는",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_024",
+    "word": "신호",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "o",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_025",
+    "word": "성적",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "남녀 간의 육체적 관계나 남성",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_026",
+    "word": "전임",
+    "hanja": "專任",
+    "category": "법률기초",
+    "definition": "어떤 일을 전문적으로 맡거나 맡김. 또는 그런 사람.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_027",
+    "word": "전과",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "이전에 죄를 범하여 재판에 의하여 확정된 형벌의 전력.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_028",
+    "word": "습득",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "주워서 얻음",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_029",
+    "word": "수도",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "한 나라의 중앙 정부가 있는 도시.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_030",
+    "word": "정도",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "사물의 성질이나 가치를 양부(良否)",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_031",
+    "word": "경계",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "사물이 어떠한 기준에 의하여 분간되는 한계.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_032",
+    "word": "환불",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "이미 지불한 돈을 되돌려줌.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_033",
+    "word": "대우",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "어떤 사회적 관계나 태도로 대하는 일",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_034",
+    "word": "반려",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "짝이 되는 동무.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_035",
+    "word": "이장",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "무덤을 옮겨 씀.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_036",
+    "word": "사용자",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "일반이용자 소비자",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_037",
+    "word": "능력",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "법률 행위를 행사할 수 있는 자격. 권리 능력",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_038",
+    "word": "사상",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "죽거나 다침.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_039",
+    "word": "수렴",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "의견이나 사상 따위가 여럿으로 나뉘어 있는 것을 하나로 모아 정리함.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_040",
+    "word": "유리",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "이익이 있음.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_041",
+    "word": "노출",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "겉으로 드러나거나 드러냄.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_042",
+    "word": "공중",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "사회의 대부분의 사람들.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_043",
+    "word": "성분",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "사물이나 현상이 가지고 있는 고유의 특성.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_044",
+    "word": "개수",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "고쳐서 바로잡거나 다시 만듦.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_045",
+    "word": "장치",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "어떤 목적에 따라 기능하도록 기계",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_046",
+    "word": "부서",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "기관",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_047",
+    "word": "상장",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "주식이나 어떤 물건을 매매 대상으로 하기 위하여 해당 거래소에 일정한 자격이나 조건을 갖춘 거래 물건으로서 등록하는 일.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_048",
+    "word": "소요",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "여러 사람이 모여 폭행이나 협박 또는 파괴 행위를 함으로써 공공질서를 문란하게 함. 또는 그런 행위.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_049",
+    "word": "주관",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "어떤 일을 책임을 지고 맡아 관리함.",
+    "readingTip": "",
+    "frequency": 1
+  },
+  {
+    "id": "legal_050",
+    "word": "통상",
+    "hanja": "",
+    "category": "법률기초",
+    "definition": "특별하지 아니하고 예사임",
+    "readingTip": "",
+    "frequency": 1
+  }
+]

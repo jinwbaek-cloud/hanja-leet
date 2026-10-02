@@ -1,0 +1,2293 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) - 운영 도메인(leet.easyhanja.org)에서만 활성화 -->
+  <script>
+    if (window.location.hostname === 'leet.easyhanja.org') {
+      var gaScript = document.createElement('script');
+      gaScript.async = true;
+      gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-1X0D4MB6HB';
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-1X0D4MB6HB');
+    }
+  </script>
+  <meta charset="UTF-8">
+  <!-- Uncaught Error Boundary for Visual Overlay Debugging -->
+  <!-- 실제 배포(Netlify 등) 방문자에게는 노출되지 않고, 로컬 개발 환경이나 ?debug=true 접속 시에만 표시됩니다 -->
+  <script>
+    function isDebugModeEnabled() {
+      try {
+        var isLocalHost = location.hostname === 'localhost' || location.hostname === '127.0.0.1' || location.protocol === 'file:';
+        var hasDebugParam = new URLSearchParams(location.search).get('debug') === 'true';
+        return isLocalHost || hasDebugParam;
+      } catch (e) {
+        return false;
+      }
+    }
+    window.addEventListener('error', function(e) {
+      if (!isDebugModeEnabled()) {
+        console.error('Runtime error:', e.message, e.error);
+        return;
+      }
+      setTimeout(function() {
+        var errorDiv = document.createElement('div');
+        errorDiv.style.color = '#FFFFFF';
+        errorDiv.style.background = '#6C4EB3';
+        errorDiv.style.border = '2px solid #5D3EB3';
+        errorDiv.style.padding = '20px';
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '10px';
+        errorDiv.style.left = '10px';
+        errorDiv.style.right = '10px';
+        errorDiv.style.zIndex = '99999';
+        errorDiv.style.fontSize = '14px';
+        errorDiv.style.fontFamily = 'monospace';
+        errorDiv.style.borderRadius = '10px';
+        errorDiv.style.whiteSpace = 'pre-wrap';
+        errorDiv.style.boxShadow = '0 4px 20px rgba(108, 78, 179, 0.2)';
+        errorDiv.innerText = '🚨 RUNTIME ERROR:\n' + e.message + '\n\nSource: ' + e.filename + '\nLine: ' + e.lineno + ', Col: ' + e.colno + '\n\nStack:\n' + (e.error ? e.error.stack : 'No stack available');
+        document.body.appendChild(errorDiv);
+      }, 500);
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      if (!isDebugModeEnabled()) {
+        console.error('Unhandled promise rejection:', e.reason);
+        return;
+      }
+      setTimeout(function() {
+        var errorDiv = document.createElement('div');
+        errorDiv.style.color = '#FFFFFF';
+        errorDiv.style.background = '#6C4EB3';
+        errorDiv.style.border = '2px solid #5D3EB3';
+        errorDiv.style.padding = '20px';
+        errorDiv.style.position = 'fixed';
+        errorDiv.style.top = '100px';
+        errorDiv.style.left = '10px';
+        errorDiv.style.right = '10px';
+        errorDiv.style.zIndex = '99999';
+        errorDiv.style.fontSize = '14px';
+        errorDiv.style.fontFamily = 'monospace';
+        errorDiv.style.borderRadius = '10px';
+        errorDiv.style.whiteSpace = 'pre-wrap';
+        errorDiv.style.boxShadow = '0 4px 20px rgba(108, 78, 179, 0.2)';
+        errorDiv.innerText = '🚨 UNHANDLED PROMISE REJECTION:\n' + e.reason;
+        document.body.appendChild(errorDiv);
+      }, 500);
+    });
+  </script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>한알국쉬(리트버전) | 한자를 알면 리트(LEET)가 쉬워</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="한알국쉬(리트버전) - LEET 언어이해 및 추리논증 기출 지문의 한자어 문해력을 세련되고 품격 있게 배양하는 사전. 차분한 라벤더 톤 테마에 한자 속뜻과 기출 지문 속 전용 용례를 수록하였습니다.">
+  
+  <!-- Google Fonts (Outfit, Noto Sans KR & Noto Serif KR) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Noto+Serif+KR:wght@300;400;500;700;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- React & ReactDOM UMD CDN (React 17 Production) -->
+  <script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="js/leet_data.js"></script>
+  
+  <!-- Babel Standalone CDN -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script>
+    // Register custom preset to force classic React compilation (no ES6 import/export)
+    Babel.registerPreset("react-classic", {
+      presets: [
+        [Babel.availablePresets["react"], { runtime: "classic" }]
+      ]
+    });
+  </script>
+
+  <!-- Tailwind CSS Play CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Custom Tailwind Config for Classical Light Mode Theme (Lavender-Purple Theme) -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            classicBg: '#F5F2FA', // 은은하고 차분한 연보라색 배경
+            classicText: '#252030', // 차콜빛이 도는 깊고 어두운 보라색 텍스트
+            classicRed: '#6C4EB3', // 세련된 딥 라벤더/보라색 포인트
+            classicTeal: '#4F62B3', // 차분한 페일 블루-퍼플
+            classicCard: '#FFFFFF', // 깨끗한 화이트 카드
+            classicBorder: '#E3DCF0', // 소프트한 라벤더-그레이 테두리
+            classicMuted: '#7F7790' // 라벤더 그레이 톤의 보조 텍스트
+          },
+          fontFamily: {
+            sans: ['Outfit', 'Noto Sans KR', 'sans-serif'],
+            serif: ['Noto Serif KR', 'Georgia', 'serif'],
+          },
+          boxShadow: {
+            'classic': '0 4px 20px -2px rgba(108, 78, 179, 0.05)',
+            'classic-hover': '0 10px 30px -4px rgba(108, 78, 179, 0.1)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Toast slide-in/fade-in animation */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 15px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+    }
+    .animate-fade-in-up {
+      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Custom Scrollbar for Classical Look */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #F5F2FA;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #E3DCF0;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #C6BCD8;
+    }
+
+    /* Classical Card styling representing Korean paper with modern Lavender touch */
+    .classic-card {
+      background: #FFFFFF;
+      border: 1px solid #E3DCF0;
+      box-shadow: 0 4px 20px -2px rgba(108, 78, 179, 0.03);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .classic-card:hover {
+      box-shadow: 0 10px 30px -4px rgba(108, 78, 179, 0.08);
+    }
+
+    /* Custom Animation for traditional float */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+    }
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+
+    /* Print Optimization CSS rules */
+    @media print {
+      /* 웹 페이지 전용 root 컨텐츠 숨김 */
+      #root, 
+      .no-print {
+        display: none !important;
+      }
+      /* 인쇄용 영역 활성화 */
+      .print-area {
+        display: block !important;
+      }
+      .print-grid {
+        display: grid !important;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 15px !important;
+      }
+      .print-card {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        border: 1px solid #D1D5DB !important;
+        border-radius: 12px !important;
+        padding: 16px !important;
+        background: #FFFFFF !important;
+      }
+    }
+    /* 평상시 웹 서핑 시 숨김 */
+    .print-area {
+      display: none;
+    }
+  </style>
+</head>
+<body class="bg-classicBg text-classicText font-sans min-h-screen selection:bg-classicRed selection:text-white antialiased overflow-x-hidden">
+
+  <!-- React Root Node -->
+  <div id="root"></div>
+
+  <!-- React & App Logic in Babel Script (Consolidated & Fully Inline) -->
+  <script type="text/babel" data-presets="react-classic">
+    const { useState, useEffect, useMemo } = React;
+
+    // --- 유령 숫자 소거 헬퍼 함수 ---
+    const cleanWordText = (word) => {
+      if (!word) return "";
+      return word.replace(/\(.*?\)/g, "").replace(/_\d+/g, "").trim();
+    };
+
+    // --- 한국어 조사 자동 판별 헬퍼 함수 ---
+    const getJosa = (word, josaType) => {
+      const clean = cleanWordText(word);
+      if (clean.length === 0) return "";
+      const lastChar = clean.charCodeAt(clean.length - 1);
+      // 한글 유니코드 판별
+      if (lastChar < 0xAC00 || lastChar > 0xD7A3) {
+        return josaType === '이/가' ? '이' : (josaType === '은/는' ? '은' : '을');
+      }
+      const hasBatchim = (lastChar - 0xAC00) % 28 > 0;
+      if (josaType === '이/가') {
+        return hasBatchim ? '이' : '가';
+      } else if (josaType === '은/는') {
+        return hasBatchim ? '은' : '는';
+      } else if (josaType === '을/를') {
+        return hasBatchim ? '을' : '를';
+      }
+      return "";
+    };
+
+    // --- Externalized LEET Dataset Reference & Smart Merging ---
+    if (window.MOCK_WORDS) {
+      const cleanWords = {};
+      Object.keys(window.MOCK_WORDS).forEach(key => {
+        const item = window.MOCK_WORDS[key];
+        if (!item) return;
+        const cleaned = cleanWordText(item.word || key);
+        if (!cleanWords[cleaned]) {
+          const newItem = { ...item };
+          newItem.word = cleaned;
+          if (newItem.sound) {
+            newItem.sound = cleanWordText(newItem.sound);
+          }
+          newItem.contexts = newItem.contexts ? [...newItem.contexts] : [];
+          cleanWords[cleaned] = newItem;
+        } else {
+          // Smart Merging: Push contexts from duplicates into the same card
+          if (item.contexts && Array.isArray(item.contexts)) {
+            cleanWords[cleaned].contexts.push(...item.contexts);
+          }
+        }
+      });
+      window.MOCK_WORDS = cleanWords;
+    }
+
+    const MOCK_WORDS = window.MOCK_WORDS;
+
+    // --- Classical Colors Mapping by Category (Updated to Violet/Lavender Spectrum) ---
+    const CATEGORY_COLORS = {
+      "구조 파악형": { 
+        border: "hover:border-classicTeal/40", 
+        badge: "bg-classicTeal/10 text-classicTeal border-classicTeal/20", 
+        glow: "shadow-sm", 
+        text: "text-classicTeal", 
+        gradient: "from-classicTeal to-indigo-900",
+        tabActive: "bg-classicTeal text-white border-classicTeal shadow-sm"
+      },
+      "개념 이해형": { 
+        border: "hover:border-classicRed/40", 
+        badge: "bg-classicRed/10 text-classicRed border-classicRed/20", 
+        glow: "shadow-sm", 
+        text: "text-classicRed", 
+        gradient: "from-classicRed to-purple-900",
+        tabActive: "bg-classicRed text-white border-classicRed shadow-sm"
+      },
+      "의미 추론형": { 
+        border: "hover:border-[#9B51E0]/40", 
+        badge: "bg-[#9B51E0]/10 text-[#9B51E0] border-[#9B51E0]/20", 
+        glow: "shadow-sm", 
+        text: "text-[#9B51E0]", 
+        gradient: "from-[#9B51E0] to-fuchsia-950",
+        tabActive: "bg-[#9B51E0] text-white border-[#9B51E0] shadow-sm"
+      },
+      "전문용어 이해형": { 
+        border: "hover:border-classicText/40", 
+        badge: "bg-classicText/10 text-classicText border-classicText/20", 
+        glow: "shadow-sm", 
+        text: "text-classicText", 
+        gradient: "from-classicText to-stone-950",
+        tabActive: "bg-classicText text-white border-classicText shadow-sm"
+      },
+      "법률기초": { 
+        border: "hover:border-amber-500/40", 
+        badge: "bg-amber-500/10 text-amber-700 border-amber-500/20", 
+        glow: "shadow-sm", 
+        text: "text-amber-700", 
+        gradient: "from-amber-500 to-amber-950",
+        tabActive: "bg-amber-500 text-white border-amber-500 shadow-sm"
+      }
+    };
+
+    // --- Inline Lucide Icons (strokeWidth=1.5) ---
+    function SearchIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <circle cx="11" cy="11" r="8" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-4.3-4.3" />
+        </svg>
+      );
+    }
+
+    // Lucide Message Square
+    function MessageIcon(props) {
+      var className = props.className || "w-4 h-4";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.625 12a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H8.25m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0H12m4.125 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 0 1-2.555-.337A5.972 5.972 0 0 1 5.41 20.97a.598.598 0 0 1-.655-.705 5.966 5.966 0 0 0 1.01-2.735C4.015 16.182 3 14.215 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25Z" />
+        </svg>
+      );
+    }
+
+    // Lucide BookOpen for "개념 이해형"
+    function BookOpenIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
+        </svg>
+      );
+    }
+
+    // Lucide Layers for "구조 파악형"
+    function LayersIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="m12 3-10 5 10 5 10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+        </svg>
+      );
+    }
+
+    // Lucide Sparkles for "의미 추론형"
+    function SparklesIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275ZM5 3v4M3 5h4M19 17v4M17 19h4" />
+        </svg>
+      );
+    }
+
+    // Lucide Bookmark for "전문용어 이해형"
+    function BookmarkIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z" />
+        </svg>
+      );
+    }
+
+    function UpvoteIcon(props) {
+      var className = props.className || "w-4 h-4";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 10.5 12 3m0 0 7.5 7.5M12 3v18" />
+        </svg>
+      );
+    }
+
+    function DownvoteIcon(props) {
+      var className = props.className || "w-4 h-4";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 13.5 12 21m0 0-7.5-7.5M12 21V3" />
+        </svg>
+      );
+    }
+
+    function ArrowRightIcon(props) {
+      var className = props.className || "w-4 h-4";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+        </svg>
+      );
+    }
+
+    function PlusIcon(props) {
+      var className = props.className || "w-4 h-4";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+        </svg>
+      );
+    }
+
+    function FlameIcon(props) {
+      var className = props.className || "w-5 h-5";
+      return (
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className={className}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.362 5.214A8.252 8.252 0 0 1 12 21 8.25 8.25 0 0 1 6.038 7.047 8.287 8.287 0 0 0 9 9.601a8.983 8.983 0 0 1 3.361-6.867 8.21 8.21 0 0 0 3 2.48Z" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 18a3.75 3.75 0 0 0 .495-7.467 5.99 5.99 0 0 0-1.925 3.546 5.974 5.974 0 0 1-2.133-1A3.75 3.75 0 0 0 12 18Z" />
+        </svg>
+      );
+    }
+
+    // Dynamic category icon helper
+    const getCategoryIcon = (category, className) => {
+      switch (category) {
+        case "구조 파악형":
+          return <LayersIcon className={className} />;
+        case "개념 이해형":
+          return <BookOpenIcon className={className} />;
+        case "의미 추론형":
+          return <SparklesIcon className={className} />;
+        case "전문용어 이해형":
+          return <BookmarkIcon className={className} />;
+        case "법률기초":
+          return <BookmarkIcon className={className} />;
+        default:
+          return <BookOpenIcon className={className} />;
+      }
+    };
+
+    // --- Main App React Component ---
+    function App() {
+      console.log("DEBUG: App component render initialized (한알국쉬(리트버전) Lavender Mode)");
+      const [selectedWord, setSelectedWord] = useState(null);
+      const [dynamicFeeds, setDynamicFeeds] = useState(() => {
+        try {
+          const saved = localStorage.getItem("dynamic_feeds");
+          return saved ? JSON.parse(saved) : {};
+        } catch (e) {
+          return {};
+        }
+      });
+      const [selectedCategory, setSelectedCategory] = useState("전체보기");
+      const [searchTerm, setSearchTerm] = useState("");
+      const [selectedClassicalFilter, setSelectedClassicalFilter] = useState("전체"); // "전체", "추리논증", "언어이해"
+      const [activeCardContexts, setActiveCardContexts] = useState({});
+      const [activeDetailContext, setActiveDetailContext] = useState(0);
+      const [todayWord, setTodayWord] = useState(null);
+      const [sortByFrequency, setSortByFrequency] = useState(false);
+
+      // --- 아는 단어 패스 기능 States & Handlers ---
+      const [passedWords, setPassedWords] = useState(() => {
+        try {
+          const saved = localStorage.getItem("passed_words");
+          return saved ? JSON.parse(saved) : [];
+        } catch (e) {
+          return [];
+        }
+      });
+      const [fadingKeys, setFadingKeys] = useState([]);
+      const [toastMessage, setToastMessage] = useState(null);
+      const [isClosingDetail, setIsClosingDetail] = useState(false);
+
+      const showToast = (message) => {
+        setToastMessage(message);
+      };
+
+      useEffect(() => {
+        if (toastMessage) {
+          const timer = setTimeout(() => {
+            setToastMessage(null);
+          }, 2500);
+          return () => clearTimeout(timer);
+        }
+      }, [toastMessage]);
+
+      const closeDetailView = (callback) => {
+        setIsClosingDetail(true);
+        setTimeout(() => {
+          setSelectedWord(null);
+          setIsClosingDetail(false);
+          if (callback) callback();
+        }, 300);
+      };
+
+      const handleMasterWord = (wordKey) => {
+        setPassedWords(prev => {
+          if (!prev.includes(wordKey)) {
+            return [...prev, wordKey];
+          }
+          return prev;
+        });
+        showToast("🎉 축하합니다! 마스터한 어휘로 등록되었습니다.");
+        closeDetailView();
+      };
+
+      useEffect(() => {
+        try {
+          localStorage.setItem("passed_words", JSON.stringify(passedWords));
+        } catch (e) {
+          console.error("LocalStorage write failed", e);
+        }
+      }, [passedWords]);
+
+      // 수험생 예문 피드(dynamicFeeds)도 브라우저 재접속 시 유지되도록 localStorage에 자동 저장
+      useEffect(() => {
+        try {
+          localStorage.setItem("dynamic_feeds", JSON.stringify(dynamicFeeds));
+        } catch (e) {
+          console.error("LocalStorage write failed (dynamicFeeds)", e);
+        }
+      }, [dynamicFeeds]);
+
+      const handlePassWord = (wordKey, e) => {
+        if (e) e.stopPropagation();
+        setFadingKeys(prev => [...prev, wordKey]);
+        setTimeout(() => {
+          setPassedWords(prev => {
+            if (!prev.includes(wordKey)) {
+              return [...prev, wordKey];
+            }
+            return prev;
+          });
+          setFadingKeys(prev => prev.filter(k => k !== wordKey));
+          // 상세 카드 초기화
+          setSelectedWord(current => {
+            if (current && current.word === wordKey) {
+              return null;
+            }
+            return current;
+          });
+        }, 500);
+      };
+
+      const handleResetPassed = () => {
+        if (confirm("학습 기록을 초기화하시겠습니까? 외운 단어들이 모두 복구됩니다.")) {
+          setPassedWords([]);
+          localStorage.removeItem("passed_words");
+        }
+      };
+
+      // --- 한자-한글 실시간 스위칭 토글 상태 ---
+      const [showHanjaInContext, setShowHanjaInContext] = useState(false);
+
+      // --- 5지선다 객관식 미니 퀴즈(Mini Quiz) States & Handlers ---
+      const [showQuizModal, setShowQuizModal] = useState(false);
+      const [quizQuestions, setQuizQuestions] = useState([]);
+      const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
+      const [quizScore, setQuizScore] = useState(0);
+      const [selectedOptionIndex, setSelectedOptionIndex] = useState(null);
+      const [isQuizFinished, setIsQuizFinished] = useState(false);
+
+      const handleStartQuiz = () => {
+        const keys = Object.keys(MOCK_WORDS);
+        if (keys.length < 5) {
+          alert("퀴즈를 생성하기 위한 어휘 데이터가 부족합니다.");
+          return;
+        }
+        
+        // 5개 단어를 랜덤하게 셔플
+        const shuffledKeys = [...keys].sort(() => 0.5 - Math.random());
+        const selectedKeys = shuffledKeys.slice(0, 5);
+        
+        const questions = selectedKeys.map(key => {
+          const correctWord = MOCK_WORDS[key];
+          const correctHanja = correctWord.hanja;
+          const cleanCorrectWord = cleanWordText(correctWord.word);
+          
+          // 오답 한자 4개 선택 (정답 한자와 중복되지 않음)
+          const incorrectHanjas = [];
+          while (incorrectHanjas.length < 4) {
+            const rKey = keys[Math.floor(Math.random() * keys.length)];
+            const rWord = MOCK_WORDS[rKey];
+            if (rWord.hanja !== correctHanja && !incorrectHanjas.includes(rWord.hanja)) {
+              incorrectHanjas.push(rWord.hanja);
+            }
+          }
+          
+          // 정답 + 오답 셔플하여 5개 선지 구성
+          const options = [correctHanja, ...incorrectHanjas].sort(() => 0.5 - Math.random());
+          
+          // 지문 문맥 획득
+          const contextObj = correctWord.contexts && correctWord.contexts[0];
+          const contextText = contextObj ? (contextObj.content || contextObj.desc) : `이 단어의 본래 문맥적 용례는 [${cleanCorrectWord}]입니다.`;
+          
+          return {
+            key: key,
+            word: cleanCorrectWord,
+            correctHanja: correctHanja,
+            brief: correctWord.brief,
+            definition: correctWord.definition,
+            context: contextText,
+            options: options
+          };
+        });
+        
+        setQuizQuestions(questions);
+        setCurrentQuizIndex(0);
+        setQuizScore(0);
+        setSelectedOptionIndex(null);
+        setIsQuizFinished(false);
+        setShowQuizModal(true);
+      };
+
+      const handleSelectOption = (optIdx) => {
+        if (selectedOptionIndex !== null) return;
+        setSelectedOptionIndex(optIdx);
+        const question = quizQuestions[currentQuizIndex];
+        if (question.options[optIdx] === question.correctHanja) {
+          setQuizScore(prev => prev + 1);
+        }
+      };
+
+      const handleNextQuestion = () => {
+        setSelectedOptionIndex(null);
+        if (currentQuizIndex < 4) {
+          setCurrentQuizIndex(prev => prev + 1);
+        } else {
+          setIsQuizFinished(true);
+        }
+      };
+
+      // --- Admin Tool States & Handlers ---
+      const [showAdmin, setShowAdmin] = useState(false);
+
+      // --- 관리자 패널 비밀번호 잠금 (해시로만 저장, 평문 비밀번호는 코드에 남기지 않음) ---
+      const ADMIN_PASSWORD_HASH = "7361edda0500d8fe1d2c12250a2b513ae96b17d6e2760c9190ce15b469270acb";
+      const [showAdminAuth, setShowAdminAuth] = useState(false);
+      const [adminPasswordInput, setAdminPasswordInput] = useState("");
+      const [adminAuthError, setAdminAuthError] = useState("");
+
+      const sha256Hex = async (text) => {
+        const encoder = new TextEncoder();
+        const data = encoder.encode(text);
+        const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+        return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+      };
+
+      // 푸터의 숨겨진 점(•)을 클릭했을 때: 이미 이 탭에서 인증했으면 바로 열고, 아니면 비밀번호 입력창을 띄움
+      const handleAdminBulletClick = () => {
+        try {
+          if (sessionStorage.getItem("admin_unlocked") === "true") {
+            setShowAdmin(true);
+            return;
+          }
+        } catch (e) { /* sessionStorage 접근 불가 시 그냥 아래로 진행 */ }
+        setAdminPasswordInput("");
+        setAdminAuthError("");
+        setShowAdminAuth(true);
+      };
+
+      const handleAdminAuthSubmit = async (e) => {
+        if (e) e.preventDefault();
+        try {
+          const hash = await sha256Hex(adminPasswordInput.trim());
+          if (hash === ADMIN_PASSWORD_HASH) {
+            try { sessionStorage.setItem("admin_unlocked", "true"); } catch (e2) {}
+            setShowAdminAuth(false);
+            setShowAdmin(true);
+          } else {
+            setAdminAuthError("비밀번호가 올바르지 않습니다.");
+          }
+        } catch (e3) {
+          setAdminAuthError("인증 처리 중 오류가 발생했습니다. (이 브라우저가 암호화 기능을 지원하지 않을 수 있습니다)");
+        }
+      };
+
+      // 관리자 패널을 닫으면서 이 탭의 인증 상태도 해제(잠금)하고 싶을 때 사용
+      const handleAdminLock = () => {
+        try { sessionStorage.removeItem("admin_unlocked"); } catch (e) {}
+        setShowAdmin(false);
+      };
+
+      const [adminSelectedWordKey, setAdminSelectedWordKey] = useState("");
+      const [adminUpdateCount, setAdminUpdateCount] = useState(0); // For forcing re-render when dataset updates
+      const [adminSearchTerm, setAdminSearchTerm] = useState("");
+
+      // --- 원클릭 저장을 위한 File System Access API 상태 ---
+      // 이 브라우저/환경이 파일 직접 쓰기를 지원하는지 여부 (Chrome/Edge + https 또는 localhost 환경 필요)
+      const supportsFileSystemAccess = typeof window !== "undefined" && "showOpenFilePicker" in window;
+      const [connectedFileHandle, setConnectedFileHandle] = useState(null);
+
+      const handleConnectDataFile = async () => {
+        try {
+          const [handle] = await window.showOpenFilePicker({
+            types: [{ description: "leet_data.js", accept: { "text/javascript": [".js"] } }],
+            excludeAcceptAllOption: false,
+            multiple: false
+          });
+          const permission = await handle.requestPermission({ mode: "readwrite" });
+          if (permission !== "granted") {
+            alert("파일 쓰기 권한이 허용되지 않았습니다. 다시 시도해 주세요.");
+            return;
+          }
+          setConnectedFileHandle(handle);
+          showToast("🔗 " + handle.name + " 파일에 연결되었습니다.");
+        } catch (e) {
+          // 사용자가 파일 선택창을 취소한 경우는 조용히 무시
+          if (e && e.name !== "AbortError") {
+            console.error("File connect failed", e);
+            alert("파일 연결 중 오류가 발생했습니다: " + e.message);
+          }
+        }
+      };
+
+      // When word is selected in admin panel, initialize editing values
+      const [editBrief, setEditBrief] = useState("");
+      const [editHanja, setEditHanja] = useState("");
+      const [editWord, setEditWord] = useState("");
+      const [editContexts, setEditContexts] = useState([]);
+
+      useEffect(() => {
+        if (adminSelectedWordKey && MOCK_WORDS[adminSelectedWordKey]) {
+          const w = MOCK_WORDS[adminSelectedWordKey];
+          setEditWord(w.word || "");
+          setEditHanja(w.hanja || "");
+          setEditBrief(w.brief || "");
+          setEditContexts(JSON.parse(JSON.stringify(w.contexts || [])));
+        } else {
+          setEditWord("");
+          setEditHanja("");
+          setEditBrief("");
+          setEditContexts([]);
+        }
+      }, [adminSelectedWordKey]);
+
+      const handleSaveWord = () => {
+        if (!adminSelectedWordKey || !MOCK_WORDS[adminSelectedWordKey]) return;
+        const target = MOCK_WORDS[adminSelectedWordKey];
+        
+        // Apply modifications
+        target.word = editWord;
+        target.hanja = editHanja;
+        target.brief = editBrief;
+        target.contexts = editContexts;
+
+        // If the word key itself changed, re-map it in window.MOCK_WORDS
+        if (adminSelectedWordKey !== editWord && editWord.trim() !== "") {
+          MOCK_WORDS[editWord] = target;
+          delete MOCK_WORDS[adminSelectedWordKey];
+          setAdminSelectedWordKey(editWord);
+        }
+
+        setAdminUpdateCount(prev => prev + 1);
+        showToast("✏️ 수정사항이 메모리에 반영되었습니다. 하단의 저장 버튼을 눌러 파일에 반영하세요.");
+      };
+
+      const handleExportData = async () => {
+        const fileContent = "// --- Extracted LEET Dataset for Hanja Urban Dictionary (Hanal Gukshi - Leet Version) ---\nwindow.MOCK_WORDS = " + JSON.stringify(MOCK_WORDS, null, 2) + ";\n";
+
+        // 파일이 연결되어 있으면 다운로드 없이 바로 그 파일에 덮어쓴다
+        if (connectedFileHandle) {
+          try {
+            const writable = await connectedFileHandle.createWritable();
+            await writable.write(fileContent);
+            await writable.close();
+            showToast("💾 " + connectedFileHandle.name + " 파일에 바로 저장되었습니다!");
+            return;
+          } catch (e) {
+            console.error("Direct file write failed", e);
+            alert("연결된 파일에 직접 저장하는 데 실패했습니다. 대신 다운로드로 저장합니다.\n(" + e.message + ")");
+            // 실패 시 아래 다운로드 방식으로 폴백
+          }
+        }
+
+        const blob = new Blob([fileContent], { type: "application/javascript;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "leet_data.js";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(url);
+      };
+
+
+      // Select random word on mount
+      useEffect(() => {
+        if (MOCK_WORDS) {
+          const keys = Object.keys(MOCK_WORDS);
+          if (keys.length > 0) {
+            const randomKey = keys[Math.floor(Math.random() * keys.length)];
+            setTodayWord(MOCK_WORDS[randomKey]);
+          }
+        }
+      }, []);
+
+      const selectAndScrollToWord = (wordObj) => {
+        if (!wordObj) return;
+        setSelectedWord(wordObj);
+        setActiveDetailContext(0);
+        if (!dynamicFeeds[wordObj.word]) {
+          setDynamicFeeds(prev => {
+            const next = Object.assign({}, prev);
+            next[wordObj.word] = wordObj.feed;
+            return next;
+          });
+        }
+        setTimeout(() => {
+          const element = document.getElementById("detail-card");
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 100);
+      };
+
+      const [newAuthor, setNewAuthor] = useState("");
+      const [newGrade, setNewGrade] = useState("로스쿨준비생");
+      const [newSourceBook, setNewSourceBook] = useState("");
+      const [newExample, setNewExample] = useState("");
+      const [feedError, setFeedError] = useState("");
+
+      const handleAddFeed = (e) => {
+        e.preventDefault();
+        if (!newAuthor.trim()) {
+          setFeedError("닉네임을 입력해주십시오.");
+          return;
+        }
+        if (!newExample.trim()) {
+          setFeedError("찰진 예문을 입력해주십시오.");
+          return;
+        }
+        if (newExample.trim().length < 10) {
+          setFeedError("문맥이 확실히 느껴지도록 최소 10자 이상 작성해주십시오.");
+          return;
+        }
+        const cleanTargetWord = cleanWordText(selectedWord.word);
+        if (!newExample.includes(cleanTargetWord)) {
+          setFeedError("예문에 해당 표제어 '" + cleanTargetWord + "'" + getJosa(cleanTargetWord, "이/가") + " 반드시 포함되어야 합니다.");
+          return;
+        }
+
+        const newFeedItem = {
+          id: Date.now(),
+          author: newAuthor.trim(),
+          grade: newGrade,
+          sourceBook: newSourceBook.trim() || undefined,
+          example: newExample.trim(),
+          upvotes: 1,
+          downvotes: 0,
+          createdAt: "방금 전",
+          comments: []
+        };
+
+        setDynamicFeeds(prev => {
+          const next = Object.assign({}, prev);
+          const currentList = prev[selectedWord.word] || [];
+          next[selectedWord.word] = [newFeedItem].concat(currentList);
+          return next;
+        });
+
+        setNewAuthor("");
+        setNewSourceBook("");
+        setNewExample("");
+        setFeedError("");
+      };
+
+      const handleVote = (feedId, type) => {
+        const wordKey = selectedWord.word;
+        setDynamicFeeds(prev => {
+          const next = Object.assign({}, prev);
+          const currentFeeds = prev[wordKey] || [];
+          next[wordKey] = currentFeeds.map(item => {
+            if (item.id === feedId) {
+              return Object.assign({}, item, {
+                upvotes: type === 'up' ? item.upvotes + 1 : item.upvotes,
+                downvotes: type === 'down' ? item.downvotes + 1 : item.downvotes
+              });
+            }
+            return item;
+          });
+          return next;
+        });
+      };
+
+      // 개편된 selectedClassicalFilter (중복 제거 Deduplication 가미)
+      const baseKeys = useMemo(() => {
+        if (!MOCK_WORDS) return [];
+        const allKeys = Object.keys(MOCK_WORDS);
+        
+        // cleanWordText 기준으로 중복 제거
+        const uniqueKeys = [];
+        const seenWords = new Set();
+        
+        allKeys.forEach(k => {
+          const item = MOCK_WORDS[k];
+          if (!item) return;
+          const cleaned = cleanWordText(item.word);
+          if (!seenWords.has(cleaned)) {
+            seenWords.add(cleaned);
+            uniqueKeys.push(k);
+          }
+        });
+        
+        // 외운 단어 스크리닝 (fadingKeys에 들어간 애니메이션 도중인 키는 일단 렌더링 유지)
+        const activeKeys = uniqueKeys.filter(k => !passedWords.includes(k) || fadingKeys.includes(k));
+        
+        if (selectedClassicalFilter === "전체") {
+          return activeKeys;
+        }
+        
+        return activeKeys.filter(k => {
+          const item = MOCK_WORDS[k];
+          const query = selectedClassicalFilter; // "추리논증" 또는 "언어이해"
+          
+          // 1. tags 확인
+          if (item.tags && item.tags.some(t => t.includes(query))) {
+            return true;
+          }
+          // 2. contexts의 source나 title 확인
+          if (item.contexts && item.contexts.some(ctx => 
+            (ctx.source && ctx.source.includes(query)) || 
+            (ctx.title && ctx.title.includes(query)) ||
+            (ctx.content && ctx.content.includes(query)) ||
+            (ctx.desc && ctx.desc.includes(query))
+          )) {
+            return true;
+          }
+          // 3. feed의 sourceBook 확인
+          if (item.feed && item.feed.some(f => f.sourceBook && f.sourceBook.includes(query))) {
+            return true;
+          }
+          // 4. category / type 확인
+          if ((item.type && item.type.includes(query)) || (item.category && item.category.includes(query))) {
+            return true;
+          }
+          return false;
+        });
+      }, [selectedClassicalFilter, passedWords, fadingKeys]);
+
+      const categoryFilteredWords = useMemo(() => {
+        if (selectedCategory === "전체보기") {
+          return baseKeys;
+        }
+        return baseKeys.filter(key => {
+          const item = MOCK_WORDS[key];
+          return item.type === selectedCategory || item.category === selectedCategory;
+        });
+      }, [selectedCategory, baseKeys]);
+
+      // 검색창 입력값 기준 실시간 필터링 (단어, 한자, 뜻풀이 매칭)
+      const filteredWords = useMemo(() => {
+        const trimmed = searchTerm.trim();
+        if (!trimmed) return categoryFilteredWords;
+        const query = trimmed.toLowerCase();
+        return categoryFilteredWords.filter(key => {
+          const item = MOCK_WORDS[key];
+          if (!item) return false;
+          const wordMatch = cleanWordText(item.word).toLowerCase().includes(query);
+          const hanjaMatch = item.hanja && item.hanja.includes(trimmed);
+          const briefMatch = item.brief && item.brief.toLowerCase().includes(query);
+          return wordMatch || hanjaMatch || briefMatch;
+        });
+      }, [categoryFilteredWords, searchTerm]);
+
+      // 기출 빈도순 정렬 처리 추가
+      const sortedAndFilteredWords = useMemo(() => {
+        let result = [...filteredWords];
+        if (sortByFrequency) {
+          result.sort((a, b) => {
+            const itemA = MOCK_WORDS[a];
+            const itemB = MOCK_WORDS[b];
+            if (!itemA || !itemB) return 0;
+            const freqA = itemA.frequency !== undefined ? Number(itemA.frequency) : (itemA.contexts ? itemA.contexts.length : 0);
+            const freqB = itemB.frequency !== undefined ? Number(itemB.frequency) : (itemB.contexts ? itemB.contexts.length : 0);
+            return freqB - freqA;
+          });
+        }
+        return result;
+      }, [filteredWords, sortByFrequency]);
+
+      const activeFeed = useMemo(() => {
+        if (!selectedWord) return [];
+        return dynamicFeeds[selectedWord.word] || selectedWord.feed;
+      }, [selectedWord, dynamicFeeds]);
+
+      const renderContentWithBold = (content) => {
+        if (!content) return "";
+        const parts = content.split(/\*\*([^*]+)\*\*/g);
+        return parts.map((part, index) => {
+          if (index % 2 === 1) {
+            // 강조된 지문 단어명이 현재 상세 뷰어의 표제어와 부합하는지 검증
+            const cleanWord = selectedWord ? selectedWord.word.replace(/\(.*?\)/g, "").trim() : "";
+            const isTarget = selectedWord && (part.trim() === cleanWord || part.trim() === selectedWord.word);
+            const displayWord = (isTarget && showHanjaInContext) ? selectedWord.hanja : part;
+            
+            return React.createElement('strong', { 
+              key: index, 
+              className: "text-classicRed border-b border-classicRed/30 font-serif font-black px-0.5 transition-all duration-300 bg-classicRed/5 hover:bg-classicRed/10 rounded" 
+            }, displayWord);
+          }
+          return part;
+        });
+      };
+
+      const wordColorInfo = selectedWord ? CATEGORY_COLORS[selectedWord.category || selectedWord.type] : null;
+
+      if (!MOCK_WORDS) {
+        return (
+          <div className="flex items-center justify-center min-h-screen">
+            <div className="text-center space-y-4">
+              <div className="w-12 h-12 border-4 border-classicRed border-t-transparent rounded-full animate-spin mx-auto"></div>
+              <p className="text-classicMuted font-serif">데이터를 불러오는 중입니다...</p>
+            </div>
+          </div>
+        );
+      }
+
+      return (
+        <div className="max-w-7xl mx-auto px-4 py-8 md:py-12 flex flex-col gap-10 min-h-screen">
+          
+          {/* Header */}
+                    {/* Header (2단/듀얼 헤더 구조로 개편) */}
+          <header className="flex flex-col gap-5 border-b border-classicBorder pb-6">
+            {/* [1단 - 최상단]: 로고 및 미니멀한 플랫폼 가이드 단추 */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div 
+                className="flex items-center gap-3 cursor-pointer group"
+                onClick={() => closeDetailView()}
+              >
+                {/* Square Seal Stamp Logo in Violet */}
+                <div className="w-9 h-9 bg-classicRed flex items-center justify-center text-white font-serif font-black text-base select-none shadow-sm rounded-sm shrink-0 group-hover:scale-105 transition-transform duration-300">
+                  한
+                </div>
+                <div>
+                  <h1 className="text-xl font-serif font-black tracking-tight text-classicText flex items-center gap-2">
+                    한알국쉬(리트버전)
+                  </h1>
+                  <p className="text-[10px] text-classicMuted font-serif font-medium tracking-wide mt-0.5">
+                    한자를 알면 리트(LEET)가 쉬워
+                  </p>
+                </div>
+              </div>
+
+              {/* 1단 우측 - 컴팩트하고 미니멀한 텍스트 단추 스타일 (About & Guide) */}
+              <div className="flex items-center gap-4 text-xs font-bold text-classicMuted">
+                <a 
+                  href="about.html" 
+                  className="hover:text-classicRed transition-colors flex items-center gap-1 py-1 px-2 hover:bg-classicRed/5 rounded-lg"
+                >
+                  <span>📖</span> 플랫폼 소개
+                </a>
+                <span className="text-classicBorder">|</span>
+                <a 
+                  href="guide.html" 
+                  className="hover:text-classicTeal transition-colors flex items-center gap-1 py-1 px-2 hover:bg-classicTeal/5 rounded-lg"
+                >
+                  <span>💡</span> 활용 가이드
+                </a>
+              </div>
+            </div>
+
+            {/* [2단 - 하단]: 필터 바 위에 상주하는 대형 볼드형 핵심 학습 도구 그룹 */}
+            <div className="flex flex-wrap items-center justify-between gap-4 pt-2 border-t border-dashed border-classicBorder/60">
+              <div className="flex flex-wrap items-center gap-3">
+                {/* 2단 핵심 ① - ⚡ 10초 순삭 미니 퀴즈 (크고 볼드형) */}
+                <button
+                  onClick={handleStartQuiz}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-classicRed text-white hover:bg-opacity-95 text-sm font-black rounded-xl shadow-md transition-all duration-300 transform active:scale-95 hover:shadow-lg shrink-0"
+                  style={{display: 'flex', alignItems: 'center'}}
+                >
+                  <span>⚡</span> 10초 순삭 미니 퀴즈
+                </button>
+
+                {/* 2단 핵심 ② - 🖨️ PDF 단어장 인쇄 (크고 볼드형) */}
+                <button
+                  onClick={() => window.print()}
+                  className="flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-classicBorder hover:border-classicRed hover:text-classicRed text-sm font-black rounded-xl shadow-sm transition-all duration-300 transform active:scale-95 shrink-0"
+                  style={{display: 'flex', alignItems: 'center'}}
+                >
+                  <span>🖨️</span> PDF 단어장 인쇄
+                </button>
+
+                {/* 2단 핵심 ③ - 🔄 학습 기록 초기화 */}
+                {passedWords.length > 0 && (
+                  <button
+                    onClick={handleResetPassed}
+                    className="flex items-center gap-2 px-5 py-2.5 bg-white border-2 border-classicRed/20 text-classicRed hover:bg-classicRed/5 text-sm font-black rounded-xl shadow-sm transition-all duration-300 transform active:scale-95 shrink-0"
+                    style={{display: 'flex', alignItems: 'center'}}
+                  >
+                    <span>🔄</span> 학습 기록 초기화 ({passedWords.length}개 완료)
+                  </button>
+                )}
+              </div>
+
+              {/* 2단 우측 - 듀얼 세그먼트 필터 및 상태 정보 배지 */}
+              <div className="flex flex-wrap items-center gap-3 ml-auto">
+                {/* Top Segmented Filter Tabs */}
+                <div className="flex bg-white border border-classicBorder p-1 rounded-full text-xs font-bold gap-1 shadow-inner shrink-0" style={{display: 'flex', padding: '3px', borderRadius: '9999px'}}>
+                  {[
+                    { label: "전체 보기", val: "전체" },
+                    { label: "추리논증", val: "추리논증" },
+                    { label: "언어이해", val: "언어이해" }
+                  ].map(item => {
+                    const isActive = selectedClassicalFilter === item.val;
+                    return (
+                      <button
+                        key={item.val}
+                        onClick={() => {
+                          setSelectedClassicalFilter(item.val);
+                          setSelectedCategory("전체보기");
+                        }}
+                        className={"px-3.5 py-1.5 rounded-full transition-all duration-300 " + (isActive ? "bg-classicRed text-white shadow-sm font-black" : "text-classicMuted hover:text-classicText")}
+                        style={{
+                          paddingLeft: '14px',
+                          paddingRight: '14px',
+                          paddingTop: '6px',
+                          paddingBottom: '6px',
+                          borderRadius: '9999px',
+                          transition: 'all 0.3s'
+                        }}
+                      >
+                        {item.label}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-[#4F62B3]/5 border border-[#4F62B3]/15 text-[#4F62B3] shrink-0" style={{display: 'inline-flex', alignItems: 'center'}}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#4F62B3] animate-pulse"></span>
+                  남은 어휘 {baseKeys.length}개 / 완료 {passedWords.length}개
+                </span>
+              </div>
+            </div>
+          </header>
+
+          {/* Today's Recommendation Section */}
+          <section className="flex flex-col items-center justify-center gap-6 max-w-2xl mx-auto w-full my-4">
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-serif font-black tracking-tight mb-2 text-classicText">
+                오늘의 <span className="text-classicRed font-serif">추천 어휘</span>
+              </h2>
+              <p className="text-classicMuted text-sm">
+                새로고침할 때마다 리트(LEET) 필수 기출 어휘 중 하나를 임의로 선정합니다.
+              </p>
+            </div>
+
+            {todayWord && (
+              <div 
+                onClick={() => selectAndScrollToWord(todayWord)}
+                className="classic-card rounded-2xl p-6 md:p-8 w-full border border-classicBorder shadow-classic hover:shadow-classic-hover hover:border-classicRed/20 transition-all duration-300 cursor-pointer group flex flex-col sm:flex-row items-center justify-between gap-6 bg-classicCard relative overflow-hidden"
+              >
+                <div className="absolute -right-16 -top-16 w-32 h-32 rounded-full bg-classicRed/5 blur-xl pointer-events-none group-hover:opacity-10 transition-all duration-300"></div>
+                
+                <div className="space-y-3 flex-1 text-center sm:text-left">
+                  <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2.5">
+                    <span className="text-3xl md:text-4xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors">
+                      {cleanWordText(todayWord.word)}
+                    </span>
+                    <span className="text-lg font-serif text-classicMuted bg-classicBg border border-classicBorder px-2.5 py-0.5 rounded-lg">
+                      {todayWord.hanja}
+                    </span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded bg-classicRed/10 border border-classicRed/20 text-classicRed">
+                      {todayWord.category || todayWord.type}
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-classicText leading-relaxed italic">
+                    “{todayWord.brief}”
+                  </p>
+                </div>
+
+                <div className="shrink-0 flex items-center gap-1.5 text-xs font-bold text-classicMuted group-hover:text-classicRed transition-all">
+                  상세 학습하기 <ArrowRightIcon className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </div>
+            )}
+          </section>
+
+          {selectedWord ? (
+            <div className={`space-y-8 transition-all duration-300 ${isClosingDetail ? "opacity-0 scale-95" : "opacity-100 scale-100"}`}>
+              {/* Word Header Intro */}
+              <div id="detail-card" className="classic-card rounded-3xl p-8 relative overflow-hidden border border-classicBorder">
+                <div className={"absolute -right-20 -top-20 w-80 h-80 rounded-full blur-3xl pointer-events-none opacity-10 bg-gradient-to-br " + (wordColorInfo ? wordColorInfo.gradient : "from-classicRed to-classicTeal")}></div>
+                
+                <div className="relative flex flex-col md:flex-row md:items-end justify-between gap-6 z-10">
+                  <div className="space-y-3">
+                    <div className="flex flex-wrap items-baseline gap-3">
+                      <h2 className="text-5xl font-serif font-black tracking-tight text-classicText">{cleanWordText(selectedWord.word)}</h2>
+                      <span className={"text-2xl font-serif font-semibold tracking-widest px-3 py-0.5 rounded-lg border bg-white " + (wordColorInfo ? wordColorInfo.badge : "")}>
+                        {selectedWord.hanja}
+                      </span>
+                      <span className={"text-xs font-bold uppercase px-2.5 py-0.5 rounded border " + (wordColorInfo ? wordColorInfo.badge : "")}>
+                        {selectedWord.category || selectedWord.type}
+                      </span>
+                    </div>
+                    <p className="text-lg text-classicText font-serif italic">
+                      “{selectedWord.brief}”
+                    </p>
+                  </div>
+                  
+                   <div className="flex items-center gap-2 shrink-0" style={{display: 'flex', alignItems: 'center'}}>
+                    <span className="px-3 py-1 bg-classicBg/60 rounded-lg text-xs font-medium text-classicMuted flex items-center gap-1.5" style={{display: 'inline-flex', alignItems: 'center'}}>
+                      <FlameIcon className="w-3.5 h-3.5 text-classicRed" /> 기출 분석 완료
+                    </span>
+                    <button
+                      onClick={() => handleMasterWord(selectedWord.word)}
+                      className="px-3 py-1 bg-[#6C4EB3] hover:bg-[#5D3EB3] text-white border border-[#6C4EB3] rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all transform active:scale-95 shadow-sm"
+                      style={{display: 'inline-flex', alignItems: 'center'}}
+                    >
+                      <span>👁️</span> 이 단어 마스터 완료
+                    </button>
+                    <button 
+                      onClick={() => closeDetailView()}
+                      className="px-3 py-1 bg-white hover:bg-classicBg border border-classicBorder rounded-lg text-xs font-bold text-classicText transition-colors"
+                    >
+                      목록으로 돌아가기
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Central Contents (2 Columns) */}
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                {/* Central Left Column: Dictionary & Hanja Analysis */}
+                <div className="flex flex-col gap-8">
+                  
+                  {/* Dictionary Definition Card */}
+                  <div className="classic-card rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-md relative overflow-hidden group transition-all duration-300">
+                    <div className="flex items-center gap-2 text-classicTeal border-b border-classicBorder pb-4">
+                      {getCategoryIcon(selectedWord.category || selectedWord.type, "w-5 h-5 text-classicTeal")}
+                      <h3 className="font-serif font-black text-sm uppercase tracking-widest text-classicText">사전적 정의</h3>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <span className="text-xs font-bold uppercase text-classicTeal tracking-wider bg-classicTeal/10 px-2 py-0.5 rounded mr-2">법학 및 표준 사전</span>
+                        <blockquote className="mt-3 text-xl font-serif font-bold text-classicText pl-4 border-l-2 border-classicTeal leading-relaxed">
+                           “{selectedWord.definition}”
+                        </blockquote>
+                      </div>
+                      
+                      <div className="mt-4 pt-4 border-t border-classicBorder text-classicMuted text-sm leading-relaxed">
+                        <p className="font-serif font-bold text-classicText mb-1">🔍 사전을 뛰어넘는 독해 팁</p>
+                        리트 기출 지문에서는 이 표준 사전의 일반적 정의보다, '법리적/논리적 맥락 내에서 해당 개념의 성립 요건과 법적 효과의 관계'를 명징하게 짚어내는 것이 무엇보다 중요합니다.
+                      </div>
+
+                      <div className="pt-2">
+                        <a 
+                          href={`https://stdict.korean.go.kr/search/searchResult.do?searchKeyword=${encodeURIComponent(selectedWord.word.replace(/\(.*?\)/g, "").replace(/_\d+/g, "").trim())}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="w-full py-3 px-4 bg-classicBg hover:bg-[#6C4EB3]/10 text-[#6C4EB3] border border-classicBorder hover:border-[#6C4EB3]/20 font-serif font-black rounded-2xl text-xs flex items-center justify-center gap-1.5 transition-all text-center"
+                          style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}
+                        >
+                          🌐 국립국어원 표준국어대사전 ↗
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hanja Breakdown Card */}
+                  <div className={"classic-card rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-md relative overflow-hidden group transition-all duration-300 " + (wordColorInfo ? wordColorInfo.border : "")}>
+                    <div className="absolute -right-16 -top-16 w-36 h-36 rounded-full bg-classicRed/5 blur-xl pointer-events-none group-hover:opacity-10 transition-all duration-300"></div>
+                    
+                    <div className="flex items-center gap-2 border-b border-classicBorder pb-4">
+                      <span className={"font-serif font-black text-sm uppercase tracking-widest flex items-center gap-2 " + (wordColorInfo ? wordColorInfo.text : "")}>
+                        {getCategoryIcon(selectedWord.category || selectedWord.type, "w-5 h-5")}
+                        한자 자구 및 속뜻 분석
+                      </span>
+                    </div>
+
+                    {/* Hanja Individual Cards Grid */}
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 justify-center">
+                      {selectedWord.hanjaBreakdown.map((item, idx) => (
+                        <div key={idx} className="bg-classicBg/40 border border-classicBorder rounded-2xl p-4 flex flex-col items-center justify-center gap-2 group hover:border-classicRed/30 transition-all duration-300 hover:scale-[1.02] shadow-sm">
+                          <span className="text-4xl md:text-5xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors duration-300 cursor-default">
+                            {item.character}
+                          </span>
+                          <div className="text-center">
+                            <p className="text-xs font-serif font-bold text-classicText">{item.hun} {item.sound}</p>
+                            <p className="text-[10px] text-classicMuted font-medium mt-1 leading-snug">{item.meaning}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="bg-classicBg/40 border border-classicBorder rounded-2xl p-5 mt-2">
+                      <p className="text-sm font-serif font-bold text-classicText mb-2 flex items-center gap-1.5">
+                        <span className={wordColorInfo ? wordColorInfo.text : "text-classicRed"}>✒️</span> 자구 속뜻 풀이
+                      </p>
+                      <p className="text-sm text-classicText leading-relaxed font-medium">
+                        {selectedWord.hanjaExplanation}
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* Central Right Column: LEET Usage Cases */}
+                <div className="classic-card rounded-3xl p-6 md:p-8 flex flex-col gap-6 shadow-md relative overflow-hidden group transition-all duration-300">
+                  <div className="absolute -right-20 -bottom-20 w-44 h-44 rounded-full bg-classicTeal/5 blur-2xl pointer-events-none"></div>
+                  
+                  <div className="flex items-center gap-2 text-classicTeal border-b border-classicBorder pb-4">
+                    <h3 className="font-serif font-black text-sm uppercase tracking-widest text-classicText flex items-center gap-2">
+                      {getCategoryIcon(selectedWord.category || selectedWord.type, "w-5 h-5 text-classicTeal")}
+                      실제 LEET 기출 지문 용례
+                    </h3>
+                  </div>
+
+                  <div className="flex flex-col gap-6">
+                    {/* Tab Selection Row if contexts length > 1 */}
+                    {(() => {
+                      const uniqueContexts = [];
+                      const seenCtx = new Set();
+                      (selectedWord.contexts || []).forEach(ctx => {
+                        const uid = (ctx.source || '') + '|' + (ctx.content || ctx.desc || '');
+                        if (!seenCtx.has(uid)) {
+                          seenCtx.add(uid);
+                          uniqueContexts.push(ctx);
+                        }
+                      });
+
+                      const safeActiveIdx = activeDetailContext < uniqueContexts.length ? activeDetailContext : 0;
+                      const ctx = uniqueContexts[safeActiveIdx] || uniqueContexts[0];
+
+                      return (
+                        <>
+                          {uniqueContexts.length > 1 && (
+                            <div className="flex flex-wrap gap-2 border-b border-classicBorder pb-3">
+                              {uniqueContexts.map((c, idx) => (
+                                <button
+                                  key={idx}
+                                  onClick={() => setActiveDetailContext(idx)}
+                                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all border ${
+                                    safeActiveIdx === idx
+                                      ? "bg-classicTeal text-white border-classicTeal shadow-sm"
+                                      : "bg-white border-classicBorder text-classicMuted hover:border-classicTeal/30 hover:text-classicTeal"
+                                  }`}
+                                >
+                                  {c.source}
+                                </button>
+                              ))}
+                            </div>
+                          )}
+
+                          {/* Active Context Content */}
+                          {ctx && (
+                            <div className="border border-classicBorder rounded-2xl bg-classicBg/20 p-5 space-y-4 relative hover:border-classicTeal/30 transition-all shadow-sm">
+                              <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                <span className="px-2.5 py-1 text-[10px] font-bold bg-classicTeal/10 text-classicTeal rounded-md border border-classicTeal/20 uppercase tracking-wider">
+                                  {ctx.source}
+                                </span>
+                                
+                                {/* 한자-한글 실시간 스위칭 토글 */}
+                                <div className="flex items-center gap-3" style={{display: 'flex', alignItems: 'center', gap: '0.75rem'}}>
+                                  <button
+                                    onClick={() => setShowHanjaInContext(prev => !prev)}
+                                    className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all border flex items-center gap-1.5 shrink-0 ${
+                                      showHanjaInContext
+                                        ? "bg-classicRed text-white border-classicRed shadow-sm"
+                                        : "bg-white border-classicBorder text-classicMuted hover:border-classicRed/20 hover:text-classicRed"
+                                    }`}
+                                    style={{fontSize: '11px', padding: '4px 10px', display: 'flex', alignItems: 'center', gap: '0.25rem'}}
+                                    title={showHanjaInContext ? "한글 기출로 보기" : "한자 기출로 보기"}
+                                  >
+                                    <span className="font-serif">漢</span> {showHanjaInContext ? "한글 보기" : "한자 보기"}
+                                  </button>
+                                  
+                                  <span className="text-xs text-classicMuted font-bold">
+                                    기출 용례 {safeActiveIdx + 1} / {uniqueContexts.length}
+                                  </span>
+                                </div>
+                              </div>
+                              
+                              <h4 className="text-base font-serif font-bold text-classicText">
+                                {ctx.title || `${cleanWordText(selectedWord.word)}${getJosa(selectedWord.word, "이/가")} 사용된 실제 기출 문맥`}
+                              </h4>
+                              
+                              <p className="text-sm text-classicText leading-relaxed font-medium">
+                                {renderContentWithBold(ctx.content || ctx.desc)}
+                              </p>
+                              
+                              {ctx.tip && (
+                                <div className="bg-white rounded-xl p-3 border border-classicBorder text-xs text-classicMuted font-medium shadow-sm">
+                                  {ctx.tip}
+                                </div>
+                              )}
+                            </div>
+                          )}
+                        </>
+                      );
+                    })()}
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Bottom Section: Urban Dictionary Feed */}
+              <section className="mt-4 flex flex-col gap-6">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-classicBorder pb-4">
+                  <div className="flex items-center gap-2.5" style={{display: 'flex', alignItems: 'center'}}>
+                    <div className="w-8 h-8 rounded-lg bg-classicRed/10 flex items-center justify-center" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                      <MessageIcon className="w-4 h-4 text-classicRed" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-serif font-black tracking-tight text-classicText">수험생 집단지성 예문 피드</h3>
+                      <p className="text-xs text-classicMuted">단어의 실제 법리적/논리적 결을 직관적으로 익히기 위해 사용자들이 작성한 학습 예문입니다.</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-1.5 self-end sm:self-auto">
+                    <span className="text-xs text-classicMuted font-semibold bg-white border border-classicBorder px-3 py-1 rounded-full">
+                      정렬: 추천순
+                    </span>
+                  </div>
+                </div>
+
+                {/* Create New Example Form */}
+                <div className="classic-card rounded-2xl p-5 border border-classicBorder relative">
+                  <h4 className="text-sm font-serif font-bold text-classicText mb-1 flex items-center gap-2" style={{display: 'flex', alignItems: 'center'}}>
+                    <PlusIcon className="w-4 h-4 text-classicRed" /> 나도 '학습 예문' 등재하기
+                  </h4>
+                  <p className="text-[10px] text-classicMuted mb-3">
+                    ※ 등재한 예문은 서버가 아닌 이 브라우저에만 저장됩니다. 다른 기기나 브라우저에서는 보이지 않으니 참고해 주세요.
+                  </p>
+                  
+                  <form onSubmit={handleAddFeed} className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[10px] uppercase font-bold text-classicMuted">닉네임</label>
+                        <input 
+                          type="text" 
+                          placeholder="예: 예비로스쿨생" 
+                          value={newAuthor}
+                          onChange={(e) => setNewAuthor(e.target.value)}
+                          className="bg-white border border-classicBorder rounded-xl px-3 py-2 text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed"
+                        />
+                      </div>
+                      
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[10px] uppercase font-bold text-classicMuted">구분</label>
+                        <select 
+                          value={newGrade}
+                          onChange={(e) => setNewGrade(e.target.value)}
+                          className="bg-white border border-classicBorder rounded-xl px-3 py-2 text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed"
+                        >
+                          <option value="로스쿨준비생">로스쿨준비생</option>
+                          <option value="로스쿨재학생">로스쿨재학생</option>
+                          <option value="일반수험생">일반수험생</option>
+                          <option value="N수생">N수생</option>
+                        </select>
+                      </div>
+
+                      <div className="flex flex-col gap-1">
+                        <label className="text-[10px] uppercase font-bold text-classicMuted">출전 (선택)</label>
+                        <input 
+                          type="text" 
+                          placeholder="예: 2024 추리논증, 민법 등" 
+                          value={newSourceBook}
+                          onChange={(e) => setNewSourceBook(e.target.value)}
+                          className="bg-white border border-classicBorder rounded-xl px-3 py-2 text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col gap-1">
+                      <label className="text-[10px] uppercase font-bold text-classicMuted">예문 작성 (표제어 '{cleanWordText(selectedWord.word)}'{getJosa(selectedWord.word, "이/가")} 반드시 포함되어야 합니다.)</label>
+                      <textarea 
+                        rows="2"
+                        placeholder="이 단어가 법리적 혹은 논증 평가 지문에서 사용될 법한 독해 예문을 지어주십시오. (예: '소급 입법에 따른 진정소급적용은 헌법상 원칙적으로 불허된다.')"
+                        value={newExample}
+                        onChange={(e) => setNewExample(e.target.value)}
+                        className="bg-white border border-classicBorder rounded-xl px-3.5 py-2.5 text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed placeholder-[#B0A79A] leading-relaxed"
+                      />
+                    </div>
+
+                    {feedError && (
+                      <p className="text-xs font-bold text-classicRed">{feedError}</p>
+                    )}
+
+                    <div className="flex justify-end mt-1" style={{display: 'flex', justifyContent: 'flex-end'}}>
+                      <button 
+                        type="submit"
+                        className="px-5 py-2.5 rounded-xl bg-classicRed text-white font-serif font-bold text-sm hover:bg-opacity-95 transition-all shadow-sm flex items-center gap-1.5"
+                        style={{display: 'flex', alignItems: 'center'}}
+                      >
+                        <PlusIcon className="w-4 h-4" /> 예문 등재
+                      </button>
+                    </div>
+                  </form>
+                </div>
+
+                {/* Examples Feed List */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {activeFeed && activeFeed.map((item) => (
+                    <div key={item.id} className="classic-card rounded-2xl p-6 flex flex-col justify-between gap-5 relative group hover:border-classicRed/20 transition-all duration-300">
+                      
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between border-b border-classicBorder/50 pb-2" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                          <div className="flex items-center gap-2 flex-wrap" style={{display: 'flex', alignItems: 'center', flexWrap: 'wrap'}}>
+                            <span className="text-xs font-bold text-classicText">{item.author}</span>
+                            <span className="text-[9px] font-bold bg-classicBg border border-classicBorder text-classicMuted px-1.5 py-0.5 rounded">
+                              {item.grade}
+                            </span>
+                            {item.sourceBook && (
+                              <span className="text-[10px] text-classicRed font-serif font-semibold ml-1">
+                                ({item.sourceBook})
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-[10px] text-classicMuted font-medium">{item.createdAt}</span>
+                        </div>
+
+                        <p className="text-sm font-semibold text-classicText leading-relaxed italic">
+                          “{item.example}”
+                        </p>
+                      </div>
+
+                      {/* Comment Preview Section */}
+                      {item.comments && item.comments.length > 0 && (
+                        <div className="bg-classicBg/50 rounded-xl p-3 border border-classicBorder space-y-1">
+                          <p className="text-[9px] uppercase font-bold text-classicMuted flex items-center gap-1" style={{display: 'flex', alignItems: 'center'}}>
+                            <MessageIcon className="w-2.5 h-2.5 text-classicMuted" /> 댓글 피드백
+                          </p>
+                          {item.comments.map((comment, cidx) => (
+                            <p key={cidx} className="text-xs text-classicMuted leading-relaxed pl-1.5 border-l border-classicBorder">
+                              • {comment}
+                            </p>
+                          ))}
+                        </div>
+                      )}
+
+                      {/* Vote & Comment Buttons */}
+                      <div className="flex items-center justify-between pt-3 border-t border-classicBorder/50" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <div className="flex items-center gap-3" style={{display: 'flex', alignItems: 'center'}}>
+                          <button 
+                            onClick={() => handleVote(item.id, 'up')}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-classicTeal/5 border border-classicTeal/10 text-classicTeal hover:bg-classicTeal/10 hover:border-classicTeal/30 transition-colors text-xs font-bold"
+                            style={{display: 'flex', alignItems: 'center'}}
+                          >
+                            <UpvoteIcon className="w-3.5 h-3.5" />
+                            {item.upvotes}
+                          </button>
+                          
+                          <button 
+                            onClick={() => handleVote(item.id, 'down')}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-classicRed/5 border border-classicRed/10 text-classicRed hover:bg-classicRed/10 hover:border-classicRed/30 transition-colors text-xs font-bold"
+                            style={{display: 'flex', alignItems: 'center'}}
+                          >
+                            <DownvoteIcon className="w-3.5 h-3.5" />
+                            {item.downvotes}
+                          </button>
+                        </div>
+
+                        <span className="text-[10px] font-bold text-classicMuted uppercase tracking-widest flex items-center gap-1" style={{display: 'flex', alignItems: 'center'}}>
+                          👍 추천비율 {Math.round((item.upvotes / (item.upvotes + item.downvotes || 1)) * 100)}%
+                        </span>
+                      </div>
+
+                    </div>
+                  ))}
+                </div>
+              </section>
+            </div>
+          ) : (
+            // Empty Search State / Welcome Screen with 'Today's Recommended LEET Words'
+            <div className="flex flex-col gap-10 w-full max-w-5xl mx-auto mt-4">
+              
+              {/* Main Welcome banner */}
+              <div className="classic-card rounded-3xl p-8 md:p-10 text-center flex flex-col items-center justify-center gap-4 border border-classicBorder shadow-md relative overflow-hidden">
+                <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#6C4EB3]/5 blur-3xl pointer-events-none"></div>
+                
+                {/* Traditional Square Logo Badge */}
+                <div className="w-14 h-14 rounded-sm bg-[#6C4EB3] flex items-center justify-center font-serif font-black text-white text-2xl shadow-md animate-float" style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                  한
+                </div>
+
+                <div className="space-y-2">
+                  <h3 className="text-2xl md:text-3xl font-serif font-black text-classicText tracking-tight">한자를 알면 리트(LEET)가 쉬워</h3>
+                  <p className="text-sm text-classicMuted leading-relaxed max-w-2xl mx-auto font-medium">
+                    LEET 언어이해 및 추리논증 지문에서 정밀한 독해가 지체되고 선지 판단의 엄밀함이 흔들리는 원인 중 하나는 고난도 개념 한자어의 속뜻을 직관적으로 관통하지 못하기 때문입니다.
+                    아래 기출 표제어 범주를 탐색하며, 실제 시험 문맥과 낱글자 속뜻의 긴밀한 유기적 연결고리를 포착해 보십시오.
+                  </p>
+                </div>
+              </div>
+
+              {/* Today's Recommended Words Section */}
+              <div className="space-y-6">
+                
+                {/* Category Filtering Tabs */}
+                <div className="flex flex-col gap-4 border-b border-classicBorder pb-5">
+                  <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <h3 className="text-lg font-serif font-black text-classicText flex items-center gap-2" style={{display: 'flex', alignItems: 'center'}}>
+                      <span className="w-2 h-2 rounded-full bg-classicRed animate-pulse"></span>
+                      오늘의 추천 리트 기출 한자어
+                    </h3>
+                    <span className="text-xs text-classicMuted font-semibold">범주를 선택하거나 검색해서 학습하십시오</span>
+                  </div>
+
+                  {/* 단어 검색창 */}
+                  <div className="relative w-full sm:max-w-sm" style={{position: 'relative'}}>
+                    <SearchIcon className="w-4 h-4 text-classicMuted absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                    <input
+                      type="text"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      placeholder="단어, 한자, 뜻으로 검색 (예: 소급, 遡及)"
+                      className="w-full pl-9 pr-9 py-2.5 bg-white border border-classicBorder rounded-xl text-sm text-classicText focus:outline-none focus:border-classicRed focus:ring-1 focus:ring-classicRed placeholder-classicMuted/70"
+                    />
+                    {searchTerm && (
+                      <button
+                        onClick={() => setSearchTerm("")}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-classicMuted hover:text-classicRed text-xs font-bold"
+                        title="검색어 지우기"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-2">
+                    {["전체보기", "구조 파악형", "개념 이해형", "의미 추론형", "전문용어 이해형", "법률기초"].map(cat => {
+                      const isActive = selectedCategory === cat;
+                      let activeStyle = 'bg-classicText text-white border-classicText';
+                      if (cat !== '전체보기' && CATEGORY_COLORS[cat]) {
+                        activeStyle = CATEGORY_COLORS[cat].tabActive;
+                      } else if (cat === '전체보기') {
+                        activeStyle = 'bg-classicRed text-white border-classicRed shadow-sm';
+                      }
+
+                      return (
+                        <button
+                          key={cat}
+                          onClick={() => setSelectedCategory(cat)}
+                          className={"px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-1.5 " + (isActive ? activeStyle : "bg-white border-classicBorder text-classicMuted hover:border-classicRed/30 hover:text-classicRed")}
+                        >
+                          {cat !== '전체보기' && getCategoryIcon(cat, "w-3.5 h-3.5")}
+                          {cat} ({
+                            cat === '전체보기' 
+                              ? baseKeys.length 
+                              : baseKeys.filter(k => MOCK_WORDS[k].category === cat || MOCK_WORDS[k].type === cat).length
+                          })
+                        </button>
+                      );
+                    })}
+
+                    {/* 정렬 토글 버튼 */}
+                    <button 
+                      onClick={() => setSortByFrequency(prev => !prev)}
+                      className={`px-4 py-2 rounded-xl text-xs font-bold transition-all duration-300 border flex items-center gap-1.5 ${sortByFrequency ? 'bg-amber-500 text-white border-amber-500 shadow-sm hover:bg-amber-600' : 'bg-amber-50 border-amber-200 text-amber-700 hover:bg-amber-100 hover:border-amber-300'}`}
+                    >
+                      🔥 {sortByFrequency ? '기출 빈도순 정렬 중' : '기출 빈도순 보기'}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Cards Grid */}
+                {sortedAndFilteredWords.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {sortedAndFilteredWords.map(key => {
+                      const wordData = MOCK_WORDS[key];
+                      const color = CATEGORY_COLORS[wordData.category || wordData.type] || {
+                        border: "hover:border-classicBorder/80",
+                        badge: "bg-classicBg border border-classicBorder text-classicMuted",
+                        glow: "shadow-none",
+                        text: "text-classicMuted",
+                        gradient: "from-classicBg to-classicCard"
+                      };
+                      const isFading = fadingKeys.includes(key);
+
+                      return (
+                        <div
+                          key={key}
+                          onClick={() => selectAndScrollToWord(wordData)}
+                          className={"classic-card rounded-2xl p-6 flex flex-col justify-between gap-4 cursor-pointer border border-classicBorder shadow-sm hover:-translate-y-1.5 hover:shadow-classic-hover hover:border-classicRed/20 group relative transition-all duration-500 ease-out " + (isFading ? "opacity-0 scale-75 -translate-y-4 blur-[1px] pointer-events-none" : "opacity-100 scale-100 translate-y-0")}
+                        >
+                          {/* 다 외웠어요 패스 단추 */}
+                          <button
+                            onClick={(e) => handlePassWord(key, e)}
+                            title="다 외웠어요 (목록에서 제외)"
+                            className={"absolute top-4 right-4 z-10 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-300 " + 
+                              (isFading 
+                                ? "bg-emerald-50 border-emerald-400 text-emerald-600 scale-110 rotate-12" 
+                                : "bg-[#F5F2FA] border border-[#D0C5E7] text-[#9A8CB9] hover:border-red-500 hover:text-red-500 hover:bg-red-50/50 hover:scale-110 active:scale-95"
+                              )}
+                            style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                          >
+                            {isFading ? "✅" : "👁️"}
+                          </button>
+
+                          <div className="space-y-3">
+                            <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                              <span className={"text-[10px] font-bold uppercase px-2.5 py-0.5 rounded border flex items-center gap-1 " + color.badge}>
+                                {getCategoryIcon(wordData.category || wordData.type, "w-3 h-3")}
+                                {wordData.category || wordData.type}
+                              </span>
+                              <span className="text-[10px] text-classicMuted font-semibold mr-8">
+                                기출 {wordData.contexts.length}건
+                              </span>
+                            </div>
+                            
+                            <h4 className="text-2xl font-serif font-black text-classicText group-hover:text-classicRed transition-colors flex items-baseline gap-2">
+                              {cleanWordText(wordData.word)} 
+                              <span className="text-xs font-normal text-classicMuted font-sans">
+                                ({wordData.hanja})
+                              </span>
+                            </h4>
+                            
+                            <p className="text-xs text-classicMuted leading-relaxed font-medium">
+                              {wordData.brief}
+                            </p>
+
+                            {/* Context Switcher / Tabs for Dashboard Card */}
+                            {wordData.contexts && wordData.contexts.length > 0 && (() => {
+                              const uniqueContexts = [];
+                              const seenCtx = new Set();
+                              wordData.contexts.forEach(ctx => {
+                                const uid = (ctx.source || '') + '|' + (ctx.content || ctx.desc || '');
+                                if (!seenCtx.has(uid)) {
+                                  seenCtx.add(uid);
+                                  uniqueContexts.push(ctx);
+                                }
+                              });
+
+                              const activeCtxIdx = activeCardContexts[key] || 0;
+                              const safeActiveIdx = activeCtxIdx < uniqueContexts.length ? activeCtxIdx : 0;
+                              const currentCtx = uniqueContexts[safeActiveIdx] || uniqueContexts[0];
+
+                              return (
+                                <div className="mt-2 pt-2 border-t border-classicBorder/40 space-y-2">
+                                  {/* Tabs */}
+                                  {uniqueContexts.length > 1 && (
+                                    <div className="flex flex-wrap gap-1">
+                                      {uniqueContexts.map((ctx, cIdx) => (
+                                        <button
+                                          key={cIdx}
+                                          onClick={(e) => {
+                                            e.stopPropagation(); // Prevent search trigger
+                                            setActiveCardContexts(prev => {
+                                              const next = Object.assign({}, prev);
+                                              next[key] = cIdx;
+                                              return next;
+                                            });
+                                          }}
+                                          className={`px-2 py-0.5 rounded text-[9px] font-bold border transition-all ${
+                                            safeActiveIdx === cIdx
+                                              ? "bg-classicRed text-white border-classicRed shadow-sm"
+                                              : "bg-classicBg text-classicMuted border-classicBorder hover:border-classicRed/20"
+                                          }`}
+                                        >
+                                          {ctx.source}
+                                        </button>
+                                      ))}
+                                    </div>
+                                  )}
+                                  
+                                  {/* Context Description */}
+                                  {currentCtx && (
+                                    <p className="text-[11px] text-classicText leading-relaxed font-medium bg-classicBg/60 p-2 rounded border border-classicBorder/30 italic">
+                                      🔍 {renderContentWithBold(currentCtx.desc || currentCtx.content)}
+                                    </p>
+                                  )}
+                                </div>
+                              );
+                            })()}
+                          </div>
+
+                          <div className="flex justify-end pt-3 border-t border-classicBorder/50" style={{display: 'flex', justifyContent: 'flex-end'}}>
+                            <span className="text-[10px] font-bold text-classicMuted group-hover:text-classicRed transition-all flex items-center gap-1" style={{display: 'flex', alignItems: 'center'}}>
+                              상세 학습 <ArrowRightIcon className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
+                            </span>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="classic-card rounded-2xl p-12 text-center text-classicMuted border border-classicBorder">
+                    {searchTerm.trim()
+                      ? `'${searchTerm.trim()}'에 해당하는 단어를 찾을 수 없습니다. 다른 검색어로 시도해 보세요.`
+                      : "해당 카테고리에 등록된 추천 단어가 아직 없습니다."}
+                  </div>
+                )}
+
+              </div>
+
+            </div>
+          )}
+
+
+
+          {/* 5지선다 객관식 미니 퀴즈 모달 */}
+          {showQuizModal && (
+            <div className="fixed inset-0 bg-classicText/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4">
+              <div className="w-full max-w-2xl bg-white rounded-3xl border border-classicBorder shadow-2xl p-6 md:p-8 flex flex-col gap-6 relative max-h-[90vh] overflow-y-auto">
+                
+                {/* Close Button */}
+                <button 
+                  onClick={() => setShowQuizModal(false)}
+                  className="absolute top-4 right-4 text-classicMuted hover:text-classicRed transition-colors font-bold text-lg"
+                >
+                  ✕
+                </button>
+
+                {!isQuizFinished ? (
+                  // --- 퀴즈 풀이 화면 ---
+                  (() => {
+                    const question = quizQuestions[currentQuizIndex];
+                    if (!question) return null;
+                    
+                    const blankText = " ______ ";
+                    const quizContext = question.context.replace(new RegExp(question.word, 'g'), blankText);
+
+                    return (
+                      <div className="space-y-6">
+                        {/* Status bar */}
+                        <div className="flex items-center justify-between border-b border-classicBorder pb-3">
+                          <span className="text-xs font-bold text-classicRed uppercase tracking-wider bg-classicRed/10 border border-classicRed/20 px-2.5 py-0.5 rounded">
+                            ⚡ LEET 한자 순삭 퀴즈
+                          </span>
+                          <span className="text-sm font-serif font-black text-classicText">
+                            문제 {currentQuizIndex + 1} / 5
+                          </span>
+                        </div>
+
+                        {/* Question Text */}
+                        <div className="space-y-3">
+                          <h4 className="text-lg font-serif font-bold text-classicText leading-relaxed">
+                            Q. 다음 기출 지문 속 빈칸(<span className="text-classicRed font-bold font-sans"> {blankText} </span>)에 들어갈 올바른 한자 표기를 고르십시오.
+                          </h4>
+                          
+                          <div className="bg-classicBg/60 border border-classicBorder/50 rounded-2xl p-5 italic text-sm text-classicText leading-relaxed font-medium">
+                            {/* 굵게 뚫어놓은 문장 렌더링 */}
+                            {renderContentWithBold(quizContext.replace(blankText, `**${blankText}**`))}
+                          </div>
+                        </div>
+
+                        {/* 5지선다 선지 목록 */}
+                        <div className="flex flex-col gap-2.5">
+                          {question.options.map((opt, oIdx) => {
+                            const isSelected = selectedOptionIndex === oIdx;
+                            const isCorrectOpt = opt === question.correctHanja;
+                            const hasAnswered = selectedOptionIndex !== null;
+                            
+                            let btnStyle = "bg-white border-classicBorder hover:border-classicRed/30 hover:bg-classicBg/30 text-classicText";
+                            if (hasAnswered) {
+                              if (isCorrectOpt) {
+                                btnStyle = "bg-green-500/10 border-green-500 text-green-700 font-bold";
+                              } else if (isSelected) {
+                                btnStyle = "bg-red-500/10 border-red-500 text-red-700 font-bold";
+                              } else {
+                                btnStyle = "bg-white border-classicBorder opacity-60 pointer-events-none";
+                              }
+                            }
+
+                            return (
+                              <button
+                                key={oIdx}
+                                onClick={() => handleSelectOption(oIdx)}
+                                disabled={hasAnswered}
+                                className={`w-full text-left p-4 rounded-2xl border text-sm transition-all flex items-center justify-between ${btnStyle}`}
+                                style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}
+                              >
+                                <span className="font-serif tracking-widest text-base">
+                                  {oIdx + 1}. {opt}
+                                </span>
+                                {hasAnswered && (
+                                  isCorrectOpt ? (
+                                    <span className="text-green-600 font-bold text-xs">🎉 정답</span>
+                                  ) : isSelected ? (
+                                    <span className="text-red-600 font-bold text-xs">❌ 오답</span>
+                                  ) : null
+                                )}
+                              </button>
+                            );
+                          })}
+                        </div>
+
+                        {/* 피드백 및 해설 영역 */}
+                        {selectedOptionIndex !== null && (
+                          <div className="p-5 bg-classicBg/60 border border-classicBorder rounded-2xl space-y-2 animate-fade-in">
+                            <div className="flex items-center gap-2">
+                              <span className={`text-xs font-bold uppercase px-2.5 py-0.5 rounded border ${
+                                question.options[selectedOptionIndex] === question.correctHanja
+                                  ? "bg-green-500/10 text-green-700 border-green-500/20"
+                                  : "bg-red-500/10 text-red-700 border-red-500/20"
+                              }`}>
+                                {question.options[selectedOptionIndex] === question.correctHanja ? "정답 피드백" : "오답 피드백"}
+                              </span>
+                              <span className="text-xs text-classicMuted font-bold">
+                                해답: {question.correctHanja} ({cleanWordText(question.word)})
+                              </span>
+                            </div>
+                            <p className="text-sm font-serif font-black text-classicText">
+                              “{question.brief}”
+                            </p>
+                            <p className="text-xs text-classicMuted leading-relaxed">
+                              사전적 정의: {question.definition}
+                            </p>
+                            
+                            <div className="flex justify-end pt-2">
+                              <button
+                                onClick={handleNextQuestion}
+                                className="px-5 py-2 bg-classicRed text-white hover:bg-opacity-95 text-xs font-bold rounded-xl transition-all shadow-sm flex items-center gap-1"
+                                style={{display: 'flex', alignItems: 'center'}}
+                              >
+                                {currentQuizIndex < 4 ? "다음 문제" : "결과 보기"} <ArrowRightIcon className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })()
+                ) : (
+                  // --- 스코어보드 결과 화면 ---
+                  <div className="text-center py-6 space-y-6 flex flex-col items-center">
+                    <div className="w-16 h-16 rounded-full bg-classicRed/10 flex items-center justify-center text-3xl animate-bounce">
+                      🎓
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <h3 className="text-2xl font-serif font-black text-classicText">미니 퀴즈 학습 완료!</h3>
+                      <p className="text-sm text-classicMuted">5문제 중 총 <span className="text-classicRed font-black text-lg">{quizScore}문제</span> 맞추셨습니다.</p>
+                    </div>
+
+                    {/* 스코어별 피드백 메시지 */}
+                    <div className="bg-classicBg/60 border border-classicBorder rounded-2xl p-4 max-w-sm w-full text-sm font-serif font-bold text-classicText">
+                      {quizScore === 5 && "🎓 수석 합격 페이스! 한자 어휘 마스터입니다."}
+                      {quizScore >= 3 && quizScore <= 4 && "👏 합격 안정권입니다! 리트 문맥력이 훌륭해요."}
+                      {quizScore < 3 && "💪 아쉽습니다! 지문 자구 풀이를 통해 복습해 봅시다."}
+                    </div>
+
+                    <div className="flex gap-3 w-full max-w-sm" style={{display: 'flex', gap: '0.75rem', width: '100%', justifyContent: 'center'}}>
+                      <button
+                        onClick={handleStartQuiz}
+                        className="flex-1 py-3 bg-classicRed text-white hover:bg-opacity-95 text-xs font-bold rounded-xl shadow-md transition-all"
+                      >
+                        다시 풀기
+                      </button>
+                      <button
+                        onClick={() => setShowQuizModal(false)}
+                        className="flex-1 py-3 bg-white hover:bg-classicBg border border-classicBorder text-classicText text-xs font-bold rounded-xl transition-all"
+                      >
+                        종료
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Admin Panel Drawer Modal */}
+          {/* 관리자 패널 비밀번호 인증 모달 */}
+          {showAdminAuth && (
+            <div className="fixed inset-0 bg-classicText/40 backdrop-blur-sm z-[9999] flex items-center justify-center p-4" style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+              <div className="w-full max-w-xs bg-white rounded-2xl shadow-2xl p-6 border border-classicBorder">
+                <h3 className="text-sm font-bold text-classicText flex items-center gap-2 mb-1" style={{display: 'flex', alignItems: 'center'}}>
+                  <span>🔒</span> 관리자 인증
+                </h3>
+                <p className="text-[11px] text-classicMuted mb-4">데이터 수정 툴은 비밀번호로 보호되어 있습니다.</p>
+                <form onSubmit={handleAdminAuthSubmit} className="space-y-3">
+                  <input
+                    type="password"
+                    autoFocus
+                    value={adminPasswordInput}
+                    onChange={(e) => setAdminPasswordInput(e.target.value)}
+                    placeholder="비밀번호 입력"
+                    className="w-full p-2.5 border border-classicBorder rounded-xl text-sm focus:outline-none focus:border-classicRed transition-all"
+                  />
+                  {adminAuthError && (
+                    <p className="text-[11px] font-bold text-classicRed">{adminAuthError}</p>
+                  )}
+                  <div className="flex items-center gap-2" style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                    <button
+                      type="button"
+                      onClick={() => setShowAdminAuth(false)}
+                      className="flex-1 py-2 text-xs font-bold text-classicMuted border border-classicBorder rounded-xl hover:bg-classicBg transition-all"
+                    >
+                      취소
+                    </button>
+                    <button
+                      type="submit"
+                      className="flex-1 py-2 text-xs font-bold text-white bg-classicRed rounded-xl hover:bg-classicRed/90 transition-all"
+                    >
+                      확인
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          )}
+
+          {showAdmin && (
+            <div className="fixed inset-0 bg-classicText/40 backdrop-blur-sm z-[9999] flex justify-end transition-all duration-300">
+              <div className="w-full max-w-lg bg-white h-full shadow-2xl p-6 overflow-y-auto flex flex-col justify-between border-l border-classicBorder">
+                <div className="space-y-6">
+                  <div className="flex items-center justify-between border-b border-classicBorder pb-4" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <h3 className="text-lg font-bold text-classicText flex items-center gap-2">
+                      <span>🛠️</span> 교수님 전용 데이터 관리자 툴
+                    </h3>
+                    <div className="flex items-center gap-2" style={{display: 'flex', alignItems: 'center', gap: '0.5rem'}}>
+                      <button 
+                        onClick={handleAdminLock}
+                        title="인증을 해제하고 닫기 (다음에 다시 열 때 비밀번호 필요)"
+                        className="text-classicMuted hover:text-classicRed text-xs font-bold border border-classicBorder px-2.5 py-1 rounded-lg bg-classicBg hover:bg-classicBg/60 transition-all"
+                      >
+                        🔒 잠그기
+                      </button>
+                      <button 
+                        onClick={() => setShowAdmin(false)}
+                        className="text-classicMuted hover:text-classicRed text-xs font-bold border border-classicBorder px-2.5 py-1 rounded-lg bg-classicBg hover:bg-classicBg/60 transition-all"
+                      >
+                        닫기
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* 파일 연결 상태 안내 */}
+                  {supportsFileSystemAccess ? (
+                    <div className={"rounded-xl p-3 text-xs font-semibold flex items-center justify-between gap-2 " + (connectedFileHandle ? "bg-emerald-50 border border-emerald-200 text-emerald-700" : "bg-classicBg border border-classicBorder text-classicMuted")} style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                      <span>
+                        {connectedFileHandle ? `🔗 연결됨: ${connectedFileHandle.name}` : "⚠️ leet_data.js 파일이 아직 연결되지 않았습니다"}
+                      </span>
+                      <button
+                        onClick={handleConnectDataFile}
+                        className="px-2.5 py-1 rounded-lg bg-white border border-classicBorder text-classicText hover:border-classicRed hover:text-classicRed transition-all text-[11px] font-bold shrink-0"
+                      >
+                        {connectedFileHandle ? "다른 파일로 변경" : "파일 연결하기"}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="rounded-xl p-3 text-[11px] font-medium bg-classicBg border border-classicBorder text-classicMuted">
+                      ⚠️ 이 브라우저(또는 이 실행 환경)는 파일 자동저장 기능을 지원하지 않습니다. Chrome/Edge로 <code>http://localhost</code> 형태 주소에서 열면 사용할 수 있어요. 지금은 기존처럼 다운로드 방식으로 저장됩니다.
+                    </div>
+                  )}
+
+                  {/* Word Selector */}
+                  <div className="space-y-2">
+                    <label className="text-xs font-bold text-classicMuted">수정할 어휘 선택 ({Object.keys(MOCK_WORDS).length}개 로드됨)</label>
+                    <input
+                      type="text"
+                      value={adminSearchTerm}
+                      onChange={(e) => setAdminSearchTerm(e.target.value)}
+                      placeholder="어휘 검색 (단어 또는 한자)"
+                      className="w-full text-sm p-2.5 border border-classicBorder rounded-xl bg-white font-serif focus:outline-none focus:border-classicRed transition-all mb-1.5"
+                    />
+                    <select
+                      value={adminSelectedWordKey}
+                      onChange={(e) => setAdminSelectedWordKey(e.target.value)}
+                      className="w-full text-sm p-3 border border-classicBorder rounded-xl bg-classicBg font-serif focus:outline-none focus:border-classicRed transition-all"
+                    >
+                      <option value="">-- 어휘 선택 --</option>
+                      {Object.keys(MOCK_WORDS).sort().filter(k => {
+                        const q = adminSearchTerm.trim();
+                        if (!q) return true;
+                        const w = MOCK_WORDS[k];
+                        return (w.word && w.word.includes(q)) || (w.hanja && w.hanja.includes(q));
+                      }).map(k => (
+                        <option key={k} value={k}>
+                          {MOCK_WORDS[k].word} ({MOCK_WORDS[k].hanja})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  {adminSelectedWordKey && MOCK_WORDS[adminSelectedWordKey] && (
+                    <div className="space-y-4 pt-2 border-t border-classicBorder/50">
+                      {/* Word Name */}
+                      <div className="grid grid-cols-2 gap-4" style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem'}}>
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold text-classicMuted">단어명 (한글)</label>
+                          <input 
+                            type="text"
+                            value={editWord}
+                            onChange={(e) => setEditWord(e.target.value)}
+                            className="w-full p-2.5 border border-classicBorder rounded-xl text-xs focus:outline-none focus:border-classicRed transition-all"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-[11px] font-bold text-classicMuted">한자 표기</label>
+                          <input 
+                            type="text"
+                            value={editHanja}
+                            onChange={(e) => setEditHanja(e.target.value)}
+                            className="w-full p-2.5 border border-classicBorder rounded-xl text-xs focus:outline-none focus:border-classicRed transition-all"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Brief Explanation */}
+                      <div className="space-y-1">
+                        <label className="text-[11px] font-bold text-classicMuted">뜻풀이 (Brief)</label>
+                        <textarea
+                          rows="2"
+                          value={editBrief}
+                          onChange={(e) => setEditBrief(e.target.value)}
+                          className="w-full p-2.5 border border-classicBorder rounded-xl text-xs focus:outline-none focus:border-classicRed transition-all resize-none"
+                        />
+                      </div>
+
+                      {/* Contexts Editing */}
+                      <div className="space-y-3">
+                        <label className="text-[11px] font-bold text-classicMuted block border-b border-classicBorder/30 pb-1">
+                          기출 지문 문맥 및 학습 팁 ({editContexts.length}건 등록됨)
+                        </label>
+                        {editContexts.map((ctx, idx) => (
+                          <div key={idx} className="p-3 border border-classicBorder rounded-xl bg-classicBg/40 space-y-2.5">
+                            <div className="flex items-center justify-between" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                              <span className="text-[10px] font-bold text-classicRed">문맥 #{idx + 1}</span>
+                              <input 
+                                type="text"
+                                value={ctx.source || ""}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setEditContexts(prev => {
+                                    const next = [...prev];
+                                    next[idx].source = val;
+                                    return next;
+                                  });
+                                }}
+                                className="w-1/2 p-1 px-2 border border-classicBorder rounded text-[10px] focus:outline-none focus:border-classicRed bg-white"
+                                placeholder="출처 (예: 2026학년도 추리논증)"
+                              />
+                            </div>
+                            
+                            <div className="space-y-1">
+                              <label className="text-[9px] font-bold text-classicMuted">기출 지문 예문</label>
+                              <textarea
+                                rows="3"
+                                value={ctx.desc || ctx.content || ""}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setEditContexts(prev => {
+                                    const next = [...prev];
+                                    if (next[idx].desc !== undefined) next[idx].desc = val;
+                                    if (next[idx].content !== undefined) next[idx].content = val;
+                                    return next;
+                                  });
+                                }}
+                                className="w-full p-2 border border-classicBorder rounded text-xs focus:outline-none focus:border-classicRed bg-white resize-none"
+                                placeholder="실제 기출 예문을 입력하세요."
+                              />
+                            </div>
+
+                            <div className="space-y-1">
+                              <label className="text-[9px] font-bold text-classicMuted">독해 팁 (Tip)</label>
+                              <input 
+                                type="text"
+                                value={ctx.tip || ""}
+                                onChange={(e) => {
+                                  const val = e.target.value;
+                                  setEditContexts(prev => {
+                                    const next = [...prev];
+                                    next[idx].tip = val;
+                                    return next;
+                                  });
+                                }}
+                                className="w-full p-2 border border-classicBorder rounded text-xs focus:outline-none focus:border-classicRed bg-white"
+                                placeholder="수험생에게 제공할 독해 팁을 작성하세요."
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+
+                      <button
+                        onClick={handleSaveWord}
+                        className="w-full py-2.5 bg-classicTeal text-white text-xs font-bold rounded-xl shadow-sm hover:bg-classicTeal/90 hover:shadow-md transition-all duration-300"
+                      >
+                        메모리 임시 저장
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Footer Controls (Export / Save Data) */}
+                <div className="border-t border-classicBorder pt-4 mt-6 space-y-2">
+                  <button
+                    onClick={handleExportData}
+                    className="w-full py-3 bg-classicRed text-white text-xs font-bold rounded-xl shadow-md hover:bg-classicRed/95 hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2"
+                    style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                  >
+                    <span>{connectedFileHandle ? "💾 연결된 leet_data.js에 바로 저장" : "💾 새 데이터 파일 생성 (leet_data.js)"}</span>
+                  </button>
+                  <p className="text-[10px] text-classicMuted text-center">
+                    {connectedFileHandle
+                      ? "저장 버튼을 누르면 다운로드 없이 연결된 파일에 바로 반영됩니다."
+                      : "다운로드한 leet_data.js 파일을 프로젝트의 js/ 폴더 안에 덮어씌우면 화면에 영구 갱신됩니다."}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Toast Message */}
+          {toastMessage && (
+            <div className="fixed bottom-12 left-1/2 transform -translate-x-1/2 z-[99999] bg-[#252030] text-white px-5 py-3 rounded-xl shadow-2xl border border-classicBorder/20 flex items-center gap-2 text-xs font-bold tracking-wide pointer-events-none animate-fade-in-up">
+              <span className="text-[#A78BFA]">✨</span> {toastMessage}
+            </div>
+          )}
+
+          {/* Footer */}
+          <footer className="mt-auto border-t border-classicBorder pt-8 text-center text-xs text-classicMuted space-y-2 pb-6">
+            <p>© 2026 한알국쉬(리트버전) & Baek Jinwoo. All rights reserved.</p>
+            <p className="font-serif font-medium text-[10px] uppercase tracking-widest text-classicMuted">
+              편찬 책임자: 백진우 <span className="cursor-pointer select-none opacity-20 hover:opacity-100 hover:text-classicRed transition-all" onClick={handleAdminBulletClick}>•</span> 한자를 알면 리트(LEET)가 쉬워 • POWERED BY REACT & TAILWIND CSS
+            </p>
+          </footer>
+
+        </div>
+      );
+    }
+
+    // Mount to Root (React 17 Style)
+    ReactDOM.render(<App />, document.getElementById('root'));
+  </script>
+  <!-- 인쇄 전용 아날로그 단어장 컨테이너 (Print CSS 용) -->
+  <div id="print-zone" class="print-area max-w-4xl mx-auto p-8 bg-white text-black font-sans">
+    <div class="border-b-4 border-black pb-4 mb-6" style="border-bottom: 4px solid #000000; padding-bottom: 12px; margin-bottom: 24px;">
+      <h1 class="text-3xl font-serif font-black text-black">한알국쉬(리트버전) 아날로그 휴대 단어장</h1>
+      <p class="text-sm text-gray-600 mt-1">LEET 언어이해 & 추리논증 기출 10개년 엄선 핵심 어휘집 (총 <span id="print-total-count">...</span>개 수록)</p>
+    </div>
+    <div id="print-list" class="print-grid"></div>
+  </div>
+
+  <script>
+    // 인쇄 전용 영역에 단어 목록을 가나다순으로 자동 렌더링합니다. (1.5초 딜레이 제거)
+    function renderPrintArea() {
+      var printList = document.getElementById('print-list');
+      var printTotalCount = document.getElementById('print-total-count');
+      if (!printList || !window.MOCK_WORDS) return;
+      if (printList.children.length > 0) return; // 이미 렌더링된 경우 중복 실행 방지
+      
+      var keys = Object.keys(window.MOCK_WORDS).sort();
+      if (printTotalCount) {
+        printTotalCount.textContent = keys.length;
+      }
+      
+      var html = '';
+      keys.forEach(function(key) {
+        var item = window.MOCK_WORDS[key];
+        var contextsHtml = '';
+        if (item.contexts && item.contexts.length > 0) {
+          var firstContext = item.contexts[0];
+          contextsHtml = '<div style="margin-top: 6px; padding: 6px; background: #F9FAFB; border-radius: 6px; font-size: 10px; color: #4B5563; font-style: italic; border: 1px solid #E5E7EB;">' + 
+            '🔍 ' + (firstContext.content || firstContext.desc || '').replace(/\*\*/g, "") + 
+            '</div>';
+        }
+        var cleanWord = (item.word || key).replace(/\(.*?\)/g, "").replace(/_\d+/g, "").trim();
+        html += '<div class="print-card flex flex-col justify-between gap-2 border border-gray-300 p-4 rounded-xl" style="border: 1px solid #D1D5DB; border-radius: 12px; padding: 16px; margin-bottom: 10px; page-break-inside: avoid; break-inside: avoid;">' +
+          '<div>' +
+            '<div class="flex items-center justify-between border-b pb-1 mb-2" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E5E7EB; padding-bottom: 4px; margin-bottom: 8px;">' +
+              '<span style="font-size: 10px; font-weight: bold; color: #4B5563;">' + (item.category || item.type || '어휘') + '</span>' +
+              '<span style="font-size: 9px; color: #9CA3AF;">기출 ' + (item.contexts ? item.contexts.length : 0) + '건</span>' +
+            '</div>' +
+            '<h3 class="text-lg font-serif font-black text-black" style="font-size: 18px; margin: 0; color: #000000;">' + cleanWord + ' <span class="text-xs font-normal text-gray-500 font-sans" style="font-size: 12px; color: #6B7280; font-weight: normal;">(' + (item.hanja || '') + ')</span></h3>' +
+            '<p class="text-xs text-gray-700 mt-1 font-medium" style="font-size: 12px; color: #374151; margin-top: 4px;">' + (item.brief || '') + '</p>' +
+            contextsHtml +
+          '</div>' +
+        '</div>';
+      });
+      printList.innerHTML = html;
+      console.log("DEBUG: Print area dynamic binding completed. Words count: " + keys.length);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', renderPrintArea);
+    } else {
+      renderPrintArea();
+    }
+    window.addEventListener('beforeprint', renderPrintArea);
+  </script>
+</body>
+</html>
+
