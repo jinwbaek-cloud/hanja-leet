@@ -664,6 +664,13 @@
         return res.trim();
       };
 
+      // --- GA4 이벤트 전송 안전 래퍼 (로컬/비운영 환경 안전 보장) ---
+      const sendGAEvent = (eventName, params = {}) => {
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', eventName, params);
+        }
+      };
+
       const [showQuizModal, setShowQuizModal] = useState(false);
       const [quizQuestions, setQuizQuestions] = useState([]);
       const [currentQuizIndex, setCurrentQuizIndex] = useState(0);
@@ -733,6 +740,7 @@
             word: cleanCorrectWord,
             correctHanja: correctHanja,
             correctLabel: correctLabel,
+            category: correctWord.category || "전문용어 이해형",
             brief: correctWord.brief,
             definition: correctWord.definition,
             context: maskedContext,
@@ -746,12 +754,19 @@
         setSelectedOptionIndex(null);
         setIsQuizFinished(false);
         setShowQuizModal(true);
+
+        sendGAEvent('quiz_start', {
+          exam_type: 'leet',
+          question_count: QUIZ_QUESTION_COUNT
+        });
       };
 
       const handleSelectOption = (optIdx) => {
         if (selectedOptionIndex !== null) return;
         setSelectedOptionIndex(optIdx);
         const question = quizQuestions[currentQuizIndex];
+        if (!question) return;
+
         const selectedOpt = question.options[optIdx];
         const isCorrect = typeof selectedOpt === 'object'
           ? (selectedOpt.key && question.key ? selectedOpt.key === question.key : selectedOpt.hanja === question.correctHanja)
@@ -759,6 +774,14 @@
         if (isCorrect) {
           setQuizScore(prev => prev + 1);
         }
+
+        sendGAEvent('quiz_answer', {
+          exam_type: 'leet',
+          term: question.correctLabel || `${question.word}(${question.correctHanja})`,
+          question_no: `q${currentQuizIndex + 1}`,
+          answer_result: isCorrect ? 'correct' : 'incorrect',
+          category: question.category || '전문용어 이해형'
+        });
       };
 
       const handleNextQuestion = () => {
@@ -767,7 +790,26 @@
           setCurrentQuizIndex(prev => prev + 1);
         } else {
           setIsQuizFinished(true);
+          sendGAEvent('quiz_complete', {
+            exam_type: 'leet',
+            question_count: QUIZ_QUESTION_COUNT,
+            correct_count: quizScore,
+            score_pct: Math.round((quizScore / QUIZ_QUESTION_COUNT) * 100)
+          });
         }
+      };
+
+      const handleCloseQuiz = () => {
+        if (!isQuizFinished && showQuizModal) {
+          const answeredCount = selectedOptionIndex !== null ? currentQuizIndex + 1 : currentQuizIndex;
+          const exitPoint = answeredCount === 0 ? 'before_q1' : `after_q${answeredCount}`;
+          sendGAEvent('quiz_exit', {
+            exam_type: 'leet',
+            question_count: QUIZ_QUESTION_COUNT,
+            exit_point: exitPoint
+          });
+        }
+        setShowQuizModal(false);
       };
 
       // --- Admin Tool States & Handlers ---
@@ -1915,7 +1957,7 @@
                 
                 {/* Close Button */}
                 <button 
-                  onClick={() => setShowQuizModal(false)}
+                  onClick={handleCloseQuiz}
                   className="absolute top-4 right-4 text-classicMuted hover:text-classicRed transition-colors font-bold text-lg"
                 >
                   ✕
